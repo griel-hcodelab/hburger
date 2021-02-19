@@ -1,0 +1,55 @@
+@use "components";
+@use "colors";
+
+#auth {
+    background-color: colors.$bgLogin;
+    background-image: url("../images/bg.svg");
+    header {
+        @include components.header;   
+    }
+    main {
+        align-items: center;
+    }
+    #form-tabs {
+        @include components.tabs;
+        width: 100%;
+        li {
+            width: 175px;
+        }
+        a {
+            text-decoration: none;
+            color: var(--dark);
+            padding: var(--space);
+        }
+    }
+    form {
+        background-color: var(--primary);
+        padding: var(--space);
+        border-bottom-left-radius: var(--radius);
+        border-bottom-right-radius: var(--radius);
+        width: 350px;
+        input {
+            @include components.input;
+        }
+        label + label {
+            margin-top: var(--space);
+        }
+        footer {
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: var(--space);
+            position: relative;
+            min-height: var(--space);
+            a {
+                color: var(--white);
+                font-size: 14px;
+            }
+            button {
+                @include components.button;
+                position: absolute;
+                bottom: -30px;
+                right: 0;
+            }
+        }
+    }
+}

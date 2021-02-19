@@ -1,0 +1,94 @@
+@use "mixins";
+@use "vars";
+@use "components";
+
+#list-orders {
+    @include mixins.reset-list;
+    @include components.scrollbar;
+    padding: var(--space);
+    height: calc(100vh - 430px);
+    overflow: auto;
+    > li {
+        background-color: var(--white);
+        border-radius: var(--radius);
+        flex-direction: row;
+        display: flex;
+        color: var(--dark);
+        > div {
+            padding: 10px;
+        }
+        .id {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            font-size: 24px;
+            width: 40px;
+            text-align: center;
+        }
+        .content {
+            flex: 1;
+            .title {
+                background-color: var(--primary);
+                color: var(--white);
+                font-weight: bold;
+                padding: 10px var(--space);
+                text-align: center;
+                text-transform: uppercase;
+            }
+            ul {
+                @include mixins.reset-list;
+                li {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    height: 32px;
+                    align-items: center;
+                }
+            }
+            font-size: 14px;
+        }
+        .actions {
+            justify-content: center;
+            border-left: var(--dark) 1px dashed;
+            margin-left: 10px;
+            button {
+                width: 40px;
+                height: 40px;
+                background: none;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                &:hover {
+                    opacity: .75;
+                    background-color: var(--gray);
+                }
+                &:active {
+                    opacity: 1;
+                    background-color: var(--primary);
+                    path {
+                        fill: var(--primaryText);
+                    }
+                }
+            }
+        }
+        & + li {
+            margin-top: var(--space);
+        }
+    }
+    @media (min-width: vars.$desktopStartWidth) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: var(--space);
+        > li {
+            & + li {
+                margin-top: 0;
+            }
+        }
+    }
+    @media (min-width: vars.$desktopStartWidth * 1.5) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media (min-width: vars.$desktopStartWidth * 2) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

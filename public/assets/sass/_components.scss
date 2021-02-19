@@ -1,0 +1,169 @@
+@use "mixins";
+@use "colors";
+@use "vars";
+@use "sass:color";
+
+@mixin scrollbar {
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+    &::-webkit-scrollbar-track {
+        background: colors.$dark;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(colors.$primary, .25);
+    }
+    &:hover {
+        &::-webkit-scrollbar-thumb {
+            background: rgba(colors.$primary, .5);
+        }
+        &::-webkit-scrollbar-thumb:hover {
+            background: rgba(colors.$primary, .75);; 
+        }
+        &::-webkit-scrollbar-thumb:active {
+            background: rgba(colors.$primary, 1);; 
+        }
+    }
+}
+
+@mixin horizontalTitle {
+    background-color: var(--white10);
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    h1 {
+        font-weight: 100;
+        font-size: 32px;
+        margin: 0;
+        span {
+            color: var(--primary);
+        }
+    }
+}
+
+@mixin avatar($size: 50px) {
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.5));
+    cursor: pointer;
+    &:hover {
+        opacity: .8;
+        filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.5));
+    }
+}
+
+@mixin category-list {
+    h2 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: bold;
+    }
+    ul {
+        @include mixins.reset-list;
+    }
+}
+
+@mixin logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    #logo-icon {
+        width: 100px;
+        height: 127px;
+    }
+    #logo-text {
+        margin-top: var(--space);
+        width: 220px;
+        height: 60px;
+    }
+    @media (min-width: vars.$desktopStartWidth) {
+        flex-direction: row;
+        #logo-icon {
+            width: initial;
+        }
+        #logo-text {
+            margin-left: var(--space);
+            width: initial;
+        }
+    }
+}
+
+@mixin header {
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+    a {
+        @include logo;
+    }
+}
+
+@mixin tabs {
+    margin: 0;
+    padding: 0;
+    background-color: colors.$bgTabs;
+    height: 80px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    list-style: none;
+    li {
+        @include mixins.flex-center;
+        height: 64px;
+        background-color: rgba(colors.$primary, .25);
+        border-top-left-radius: var(--radius);
+        border-top-right-radius: var(--radius);
+        padding: var(--space);
+        color: var(--dark);
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 22px;
+        cursor: pointer;
+        &:hover {
+            background-color: rgba(colors.$primary, .5);
+        }
+        &.active {
+            background-color: var(--primary);
+            cursor: default;
+        }
+    }
+}
+
+@mixin input {
+    height: 50px;
+    border-radius: var(--radius);
+    border: none;
+    font-size: 16px;
+    padding: var(--space);
+    outline: none;
+    &:focus {
+        background-color: rgba(colors.$white, .9);
+    }
+    + input {
+        margin-top: var(--space);
+    }
+}
+
+@mixin button($color: colors.$dark) {
+    background-color: color.scale($color, $lightness: 5%);
+    border: none;
+    border-radius: var(--radius);
+    color: var(--white);
+    height: 48px;
+    min-width: 110px;
+    text-transform: uppercase;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0 0 10px color.adjust(colors.$primary, $alpha: -0.75);
+    &:hover {
+        background-color: color.adjust($color, $lightness: 7.5%);
+        box-shadow: 0 0 10px var(--primary);
+    }
+    &:active {
+        background-color: var(--light);
+        color: var(--dark);
+        transition-duration: .05s;
+        box-shadow: 0 0 5px var(--primary);
+    }
+}

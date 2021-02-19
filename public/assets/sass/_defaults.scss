@@ -1,0 +1,22 @@
+@use "colors";
+
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    transition: all .2s ease-in-out;
+    &::selection {
+        background: var(--primary);
+        color: var(--white);
+    }
+}
+
+body {
+    margin: 0;
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+body, div, section, main, article, header, footer, form, label {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,838 @@
+/* $theme: green;
+$bgLogin: #0D1807;
+$bgTabs: #252F1F;
+$bgHorizontalLine: #1F2525;
+$primary: #59AE16;
+$primaryText: $white;
+$secondary: rgba(#A1EB73, .7);  */
+/* $theme: blue;
+$bgLogin: #08182B;
+$bgTabs: #202F3F;
+$bgHorizontalLine: #1F2525;
+$primary: #1F3BE5;
+$primaryText: $white;
+$secondary: rgba(#1B9AF6, .7); */
+:root {
+  --radius: 10px;
+  --space: 20px;
+  --bar-height: 64px;
+  --field-height: 48px;
+  --primary: #DD0E0E;
+  --primaryText: #FFFFFF;
+  --secondary: rgba(255, 82, 82, 0.7);
+  --dark: #070D0D;
+  --light: #D7D7D7;
+  --white: #FFFFFF;
+  --gray: #E3E3E3;
+  --white10: rgba(255, 255, 255, 0.1);
+  --white25: rgba(255, 255, 255, 0.25);
+  --white90: rgba(255, 255, 255, 0.9);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  transition: all 0.2s ease-in-out;
+}
+*::selection {
+  background: var(--primary);
+  color: var(--white);
+}
+
+body {
+  margin: 0;
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+body, div, section, main, article, header, footer, form, label {
+  display: flex;
+  flex-direction: column;
+}
+
+#auth {
+  background-color: #250303;
+  background-image: url("../images/bg.svg");
+}
+#auth header {
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+}
+#auth header a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#auth header a #logo-icon {
+  width: 100px;
+  height: 127px;
+}
+#auth header a #logo-text {
+  margin-top: var(--space);
+  width: 220px;
+  height: 60px;
+}
+@media (min-width: 768px) {
+  #auth header a {
+    flex-direction: row;
+  }
+  #auth header a #logo-icon {
+    width: initial;
+  }
+  #auth header a #logo-text {
+    margin-left: var(--space);
+    width: initial;
+  }
+}
+#auth main {
+  align-items: center;
+}
+#auth #form-tabs {
+  margin: 0;
+  padding: 0;
+  background-color: #3A1C1C;
+  height: 80px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  list-style: none;
+  width: 100%;
+}
+#auth #form-tabs li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+  background-color: rgba(221, 14, 14, 0.25);
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+  padding: var(--space);
+  color: var(--dark);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 22px;
+  cursor: pointer;
+}
+#auth #form-tabs li:hover {
+  background-color: rgba(221, 14, 14, 0.5);
+}
+#auth #form-tabs li.active {
+  background-color: var(--primary);
+  cursor: default;
+}
+#auth #form-tabs li {
+  width: 175px;
+}
+#auth #form-tabs a {
+  text-decoration: none;
+  color: var(--dark);
+  padding: var(--space);
+}
+#auth form {
+  background-color: var(--primary);
+  padding: var(--space);
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  width: 350px;
+}
+#auth form input {
+  height: 50px;
+  border-radius: var(--radius);
+  border: none;
+  font-size: 16px;
+  padding: var(--space);
+  outline: none;
+}
+#auth form input:focus {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+#auth form input + input {
+  margin-top: var(--space);
+}
+#auth form label + label {
+  margin-top: var(--space);
+}
+#auth form footer {
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: var(--space);
+  position: relative;
+  min-height: var(--space);
+}
+#auth form footer a {
+  color: var(--white);
+  font-size: 14px;
+}
+#auth form footer button {
+  background-color: #101d1d;
+  border: none;
+  border-radius: var(--radius);
+  color: var(--white);
+  height: 48px;
+  min-width: 110px;
+  text-transform: uppercase;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(221, 14, 14, 0.25);
+  position: absolute;
+  bottom: -30px;
+  right: 0;
+}
+#auth form footer button:hover {
+  background-color: #142626;
+  box-shadow: 0 0 10px var(--primary);
+}
+#auth form footer button:active {
+  background-color: var(--light);
+  color: var(--dark);
+  transition-duration: 0.05s;
+  box-shadow: 0 0 5px var(--primary);
+}
+
+#app.no-footer > section main {
+  padding-bottom: 0;
+}
+#app > section {
+  flex: 1;
+}
+#app > section > header {
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+  width: 100%;
+  position: relative;
+}
+#app > section > header a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#app > section > header a #logo-icon {
+  width: 100px;
+  height: 127px;
+}
+#app > section > header a #logo-text {
+  margin-top: var(--space);
+  width: 220px;
+  height: 60px;
+}
+@media (min-width: 768px) {
+  #app > section > header a {
+    flex-direction: row;
+  }
+  #app > section > header a #logo-icon {
+    width: initial;
+  }
+  #app > section > header a #logo-text {
+    margin-left: var(--space);
+    width: initial;
+  }
+}
+#app > section > header::before {
+  position: absolute;
+  top: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-position: top center;
+  background-image: linear-gradient(180deg, rgba(7, 13, 13, 0.5) 50.52%, #070D0D 100%), url("../images/photo-red.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: brightness(0.8);
+}
+#app > section > header a {
+  position: relative;
+}
+#app > section > header #avatar {
+  position: absolute;
+  top: var(--space);
+  right: var(--space);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.5));
+  cursor: pointer;
+}
+#app > section > header #avatar:hover {
+  opacity: 0.8;
+  filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.5));
+}
+#app > section main {
+  padding-bottom: 64px;
+  flex: 1;
+  width: 100%;
+}
+#app > section main > header {
+  background-color: var(--white10);
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+#app > section main > header h1 {
+  font-weight: 100;
+  font-size: 32px;
+  margin: 0;
+}
+#app > section main > header h1 span {
+  color: var(--primary);
+}
+#app > section main > section {
+  height: calc(100vh - 494px);
+  overflow: auto;
+  min-height: 200px;
+}
+#app > section main > section::-webkit-scrollbar {
+  width: 10px;
+}
+#app > section main > section::-webkit-scrollbar-track {
+  background: #070D0D;
+}
+#app > section main > section::-webkit-scrollbar-thumb {
+  background: rgba(221, 14, 14, 0.25);
+}
+#app > section main > section:hover::-webkit-scrollbar-thumb {
+  background: rgba(221, 14, 14, 0.5);
+}
+#app > section main > section:hover::-webkit-scrollbar-thumb:hover {
+  background: rgba(221, 14, 14, 0.75);
+}
+#app > section main > section:hover::-webkit-scrollbar-thumb:active {
+  background: #dd0e0e;
+}
+#app > section main .category {
+  margin: var(--space);
+}
+#app > section main .category h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: bold;
+}
+#app > section main .category ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#app > section main .category ul {
+  margin-top: var(--space);
+  color: rgba(255, 82, 82, 0.7);
+}
+#app > section main .category ul label {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: none;
+}
+#app > section main .category ul label h3, #app > section main .category ul label div {
+  padding: 10px 0;
+  border-bottom: var(--secondary) 1px dotted;
+}
+#app > section main .category ul label h3 {
+  flex: 1;
+  font-weight: 100;
+  font: inherit;
+  margin: 0;
+}
+#app > section main .category ul label > span {
+  display: flex;
+  margin-right: 10px;
+  width: 32px;
+  height: 32px;
+  border: var(--secondary) 1px solid;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+#app > section main .category ul label > span::before {
+  position: relative;
+  width: 0%;
+  height: 0%;
+  content: "";
+  background-color: var(--secondary);
+  transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+#app > section main .category ul label input {
+  display: none;
+}
+#app > section main .category ul label input:checked + span::before {
+  width: 80%;
+  height: 80%;
+}
+#app > section main .category ul label:hover {
+  color: #ff5252;
+}
+#app > section main .category ul label:hover > span {
+  border-color: #ff5252;
+}
+#app > section main .category ul label:hover > span::before {
+  background-color: #ff5252;
+}
+#app > section > footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #1F2525;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#app > section > footer button {
+  background-color: #ea0f0f;
+  border: none;
+  border-radius: var(--radius);
+  color: var(--white);
+  height: 48px;
+  min-width: 110px;
+  text-transform: uppercase;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(221, 14, 14, 0.25);
+}
+#app > section > footer button:hover {
+  background-color: #f12020;
+  box-shadow: 0 0 10px var(--primary);
+}
+#app > section > footer button:active {
+  background-color: var(--light);
+  color: var(--dark);
+  transition-duration: 0.05s;
+  box-shadow: 0 0 5px var(--primary);
+}
+#app > section > footer.show {
+  z-index: 1;
+}
+@media (min-width: 768px) {
+  #app > section > footer {
+    width: calc(100vw - 350px);
+  }
+}
+#app > section.page form {
+  padding: var(--space);
+}
+#app > section.page form input, #app > section.page form select {
+  height: 50px;
+  width: 100%;
+  border: var(--light) 1px solid;
+  border-radius: var(--radius);
+  color: var(--dark);
+  font-size: 16px;
+  padding: 0 var(--space);
+  outline: none;
+}
+#app > section.page form input::placeholder, #app > section.page form select::placeholder {
+  color: var(--light);
+}
+#app > section.page form input:focus, #app > section.page form select:focus {
+  border-color: var(--primary);
+}
+#app > section.page form input + input, #app > section.page form input + select, #app > section.page form input + .fields, #app > section.page form select + input, #app > section.page form select + select, #app > section.page form select + .fields {
+  margin-top: var(--space);
+}
+#app > section.page form .fields {
+  flex-direction: row;
+}
+#app > section.page form .fields .field {
+  flex: 1;
+  margin-right: 10px;
+}
+#app > section.page form .fields .field + .field {
+  margin-right: 0;
+  margin-left: 10px;
+}
+#app > section.page form .fields + input, #app > section.page form .fields + select {
+  margin-top: var(--space);
+}
+#app > section.page section, #app > section.page footer {
+  background-color: var(--white);
+}
+#app > section.page footer button {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#app > section.page footer button svg {
+  margin-right: 10px;
+}
+@media (min-width: 768px) {
+  #app > section.page {
+    width: 100%;
+    align-items: center;
+  }
+  #app > section.page main {
+    align-items: center;
+  }
+  #app > section.page main > section {
+    padding-bottom: 64px;
+  }
+  #app > section.page main section, #app > section.page footer {
+    max-width: 768px;
+    width: 100%;
+  }
+}
+#app aside {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--white);
+  color: var(--dark);
+  height: 64px;
+}
+#app aside header {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  position: absolute;
+  padding: 16px;
+  width: calc(100vw - 204px);
+  cursor: pointer;
+}
+#app aside header svg {
+  height: 32px;
+  width: 32px;
+  margin-right: 10px;
+}
+#app aside header strong {
+  flex: 1;
+  font-size: 10px;
+}
+#app aside header strong small {
+  display: block;
+  font-size: inherit;
+  font-weight: 100;
+}
+#app aside header:hover {
+  background-color: var(--light);
+}
+#app aside header:active {
+  background-color: var(--dark);
+  color: var(--light);
+}
+#app aside header:active path {
+  fill: var(--light);
+}
+#app aside section {
+  height: 0;
+  overflow: hidden;
+}
+#app aside section ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#app aside section ul li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: none;
+  height: 48px;
+  border-bottom: var(--dark) 1px dotted;
+}
+#app aside section ul li:hover div {
+  opacity: 0.7;
+}
+#app aside section ul li button {
+  background: none;
+  outline: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+#app aside section ul li button:hover {
+  opacity: 0.75;
+  background-color: var(--gray);
+}
+#app aside section ul li button:active {
+  opacity: 1;
+  background-color: var(--primary);
+}
+#app aside section ul li button:active path {
+  fill: var(--primaryText);
+}
+#app aside footer {
+  flex-direction: row;
+  height: 64px;
+}
+#app aside footer .close {
+  flex: 1;
+  flex-direction: row;
+  padding: 0 var(--space);
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 0.05s;
+}
+#app aside footer .close svg, #app aside footer .close span {
+  display: none;
+}
+#app aside footer .close svg {
+  margin-right: 10px;
+}
+#app aside footer .close:hover {
+  background-color: var(--light);
+}
+#app aside footer .close:active {
+  background-color: var(--dark);
+  color: var(--light);
+}
+#app aside footer .close:active path {
+  fill: var(--light);
+}
+@media (min-width: 768px) {
+  #app aside footer .close {
+    display: none;
+  }
+}
+#app aside footer .price {
+  background-color: var(--gray);
+  width: 140px;
+  font-size: 24px;
+  text-align: right;
+  padding: 0 var(--space);
+  display: flex;
+  justify-content: center;
+  flex-direction: column-reverse;
+}
+#app aside footer .price small {
+  text-transform: uppercase;
+  font-size: 10px;
+}
+@media (min-width: 768px) {
+  #app aside footer .price {
+    flex: 1;
+    width: initial;
+    flex-direction: column;
+    text-align: left;
+    font-weight: 600;
+  }
+}
+#app aside footer button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  outline: none;
+  flex-direction: column;
+  cursor: pointer;
+  transition-duration: 0.05s;
+}
+#app aside footer button:hover {
+  background-color: #f12020;
+}
+#app aside footer button:active {
+  background-color: var(--dark);
+  transition-duration: 0.05s;
+}
+@media (min-width: 768px) {
+  #app aside footer button {
+    width: 120px;
+    flex-direction: row;
+  }
+  #app aside footer button svg {
+    margin-right: 10px;
+  }
+}
+#app aside.open {
+  height: calc(100vh - 350px);
+}
+#app aside.open header, #app aside.open section {
+  padding: var(--space);
+  height: initial;
+}
+#app aside.open header {
+  position: static;
+  width: initial;
+}
+#app aside.open header svg {
+  width: 64px;
+  height: 64px;
+}
+#app aside.open header strong {
+  font-size: 24px;
+}
+#app aside.open section {
+  height: calc(100vh - 518px);
+}
+@media (min-width: 768px) {
+  #app aside.open section {
+    height: calc(100vh - 168px);
+  }
+}
+#app aside.open footer .close svg {
+  height: 24px;
+  width: 24px;
+}
+#app aside.open footer .close svg, #app aside.open footer .close span {
+  display: flex;
+}
+@media (min-width: 768px) {
+  #app aside {
+    width: 350px;
+    position: static;
+    height: 100vh;
+  }
+  #app aside.open {
+    height: 100vh;
+  }
+  #app aside header {
+    position: inherit;
+    width: initial;
+  }
+  #app aside header svg {
+    width: 64px;
+    height: 64px;
+  }
+  #app aside header strong {
+    font-size: 24px;
+  }
+  #app aside header:hover, #app aside header:active {
+    background-color: var(--white);
+    color: var(--dark);
+  }
+  #app aside section {
+    height: calc(100vh - 160px);
+    padding: var(--space);
+  }
+}
+@media (min-width: 768px) {
+  #app {
+    flex-direction: row;
+  }
+}
+
+#list-orders {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: var(--space);
+  height: calc(100vh - 430px);
+  overflow: auto;
+}
+#list-orders::-webkit-scrollbar {
+  width: 10px;
+}
+#list-orders::-webkit-scrollbar-track {
+  background: #070D0D;
+}
+#list-orders::-webkit-scrollbar-thumb {
+  background: rgba(221, 14, 14, 0.25);
+}
+#list-orders:hover::-webkit-scrollbar-thumb {
+  background: rgba(221, 14, 14, 0.5);
+}
+#list-orders:hover::-webkit-scrollbar-thumb:hover {
+  background: rgba(221, 14, 14, 0.75);
+}
+#list-orders:hover::-webkit-scrollbar-thumb:active {
+  background: #dd0e0e;
+}
+#list-orders > li {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  flex-direction: row;
+  display: flex;
+  color: var(--dark);
+}
+#list-orders > li > div {
+  padding: 10px;
+}
+#list-orders > li .id {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: 24px;
+  width: 40px;
+  text-align: center;
+}
+#list-orders > li .content {
+  flex: 1;
+  font-size: 14px;
+}
+#list-orders > li .content .title {
+  background-color: var(--primary);
+  color: var(--white);
+  font-weight: bold;
+  padding: 10px var(--space);
+  text-align: center;
+  text-transform: uppercase;
+}
+#list-orders > li .content ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#list-orders > li .content ul li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 32px;
+  align-items: center;
+}
+#list-orders > li .actions {
+  justify-content: center;
+  border-left: var(--dark) 1px dashed;
+  margin-left: 10px;
+}
+#list-orders > li .actions button {
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+#list-orders > li .actions button:hover {
+  opacity: 0.75;
+  background-color: var(--gray);
+}
+#list-orders > li .actions button:active {
+  opacity: 1;
+  background-color: var(--primary);
+}
+#list-orders > li .actions button:active path {
+  fill: var(--primaryText);
+}
+#list-orders > li + li {
+  margin-top: var(--space);
+}
+@media (min-width: 768px) {
+  #list-orders {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: var(--space);
+  }
+  #list-orders > li + li {
+    margin-top: 0;
+  }
+}
+@media (min-width: 1152px) {
+  #list-orders {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1536px) {
+  #list-orders {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/*# sourceMappingURL=main.css.map */
