@@ -1,22 +1,19 @@
 document.querySelectorAll("#app").forEach(page => {
 
-    
-    const openAside = page.querySelector("aside")
-    const closeAside = openAside.querySelector("footer .close")
+  const aside = page.querySelector("aside")
+  const buttonOpenAside = page.querySelector("aside header")
+  const closeAside = page.querySelector("footer .close")
 
-    if (openAside) {
-        openAside.addEventListener("click", e => {
-            openAside.classList.add("open")
-        })
-    }
+  if (buttonOpenAside) {
+    buttonOpenAside.addEventListener("click", e => {
+        aside.classList.add("open")
+    })
+  }
 
-    if(closeAside) {
-        closeAside.addEventListener("click", e => {
-            openAside.classList.remove("open")
-        })
-    }
-
+  if(closeAside) {
+    closeAside.addEventListener("click", e => {
+      aside.classList.remove("open")
+    })
+  }
 
 })
-
-
