@@ -1,0 +1,18 @@
+{
+    "hosting": {
+      "public": "public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
+    },
+      "apiKey": "AIzaSyC2b-c7Yjib9RM_16n4lG2DB0uQ5knwBLc",
+      "authDomain": "hburger-9a4f7.firebaseapp.com",
+      "projectId": "hburger-9a4f7",
+      "storageBucket": "hburger-9a4f7.appspot.com",
+      "messagingSenderId": "567527191780",
+      "appId": "1:567527191780:web:e763ff91ecd4d3a18228f1",
+      "measurementId": "G-5VM5LYNBND"
+  }
+  
