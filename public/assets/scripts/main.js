@@ -1,3 +1,6 @@
+//Imports
+import firebase from './firebase-app';
+
 document.querySelectorAll("#app").forEach(page => {
 
   const aside = page.querySelector("aside")
@@ -17,3 +20,5 @@ document.querySelectorAll("#app").forEach(page => {
   }
 
 })
+
+//Pegar ingredientes do Firebase
