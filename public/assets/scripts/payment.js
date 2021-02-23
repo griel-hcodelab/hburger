@@ -1,5 +1,6 @@
 import IMask from 'imask';
 import { checkInput } from './utils';
+//import { firebase } from './firebase-app';
 
 document.querySelectorAll("#app").forEach((page)=>{
     //Definindo as constantes
@@ -47,3 +48,10 @@ document.querySelectorAll("#app").forEach((page)=>{
         });
     }
 });
+
+/*function saveOrder(){
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+
+
+}*/
