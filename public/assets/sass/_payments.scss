@@ -1,0 +1,27 @@
+@use 'components';
+
+#app {
+    section {
+        main {
+            form {
+                div {
+                    &#errorField {
+                        @include components.error;
+                        display: none;
+                    }
+                }
+            }
+        }
+        footer {
+            button {
+                &:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed!important;
+                    &:active {
+                        background-color: inherit;
+                    }
+                }
+            }
+        }
+    }
+}

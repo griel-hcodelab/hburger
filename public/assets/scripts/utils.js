@@ -1,6 +1,15 @@
+//Gerenciador de menus
 export function menuHandler(menu, action = null) {
     menu.classList.toggle(action);
 }
+
+//Verificador de inputs
+export function checkInput(input) {
+    if (!input.value) {
+        return false;
+    }
+}
+
 
 //Adicionar conteúdo à página
 export function appendTemplate(element, tagName, html){
