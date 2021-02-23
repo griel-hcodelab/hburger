@@ -1,3 +1,7 @@
+//Constantes Globais
+import firebase from './firebase-app';
+const auth = firebase.auth();
+
 //Gerenciador de menus
 export function menuHandler(menu, action = null) {
     document.querySelector(menu).classList.toggle(action);
@@ -9,7 +13,6 @@ export function checkInput(input) {
         return false;
     }
 }
-
 
 //Adicionar conteúdo à página
 export function appendTemplate(element, tagName, html){
