@@ -1,6 +1,6 @@
 import IMask from 'imask';
-import { checkInput } from './utils';
-//import { firebase } from './firebase-app';
+import { checkInput, verifyLogin } from './utils';
+import firebase from './firebase-app';
 
 document.querySelectorAll("#app").forEach((page)=>{
     //Definindo as constantes
@@ -10,6 +10,25 @@ document.querySelectorAll("#app").forEach((page)=>{
 
     const inputs = page.querySelectorAll("input");
     const saveOrderBtn = page.querySelector("footer button");
+
+    const menu = page.querySelector("#avatar");
+
+    if (menu) {
+        const auth = firebase.auth();
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                console.log("Está logado");
+                auth.signOut();
+                window.location.href = "index.html";
+            } else {
+                console.log("Não está logado");
+                menu.addEventListener("click", (e)=>{
+                    window.location.href = "login.html";
+                })
+            }
+        });
+
+    }
 
     if (inputs) {
         inputs.forEach((input)=>{ 
@@ -43,15 +62,23 @@ document.querySelectorAll("#app").forEach((page)=>{
                     document.querySelector("#errorField").innerHTML = "Verifique se todos os campos estão preenchidos."
                 } else {
                     document.querySelector("#errorField").style.display = "none";
+                    saveOrder();
                 }
             });
         });
     }
 });
 
-/*function saveOrder(){
+function saveOrder(){
     const db = firebase.firestore();
     const auth = firebase.auth();
 
-
-}*/
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            console.log("Logado", user);
+        } else {
+            console.log("Deslogado")
+        }
+    })
+}
+    

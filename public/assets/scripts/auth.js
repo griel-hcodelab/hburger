@@ -29,7 +29,7 @@ if(authPage) {
                         displayName: values.name
                     })
     
-                    window.location.href = '/public'
+                    window.location.href = 'index.html'
                 })
                 .catch(error => {
                     alert("Erro ao Cadastrar")
@@ -49,7 +49,7 @@ if(authPage) {
             auth
                 .signInWithEmailAndPassword(values.email, values.password)
                 .then(response => {
-                    window.location.href = '/public'
+                    window.location.href = 'index.html';
                 })
                 .catch(error => {
                     alert("Email ou senha não existem", error)
@@ -72,7 +72,7 @@ if(authPage) {
 
             auth.sendPasswordResetEmail(values.email)
                 .then(() => {
-                    window.location.href = '/login.html'
+                    window.location.href = 'login.html'
                 })
                 .catch((error) => {
                     alert('Ocorreu um erro', error)
