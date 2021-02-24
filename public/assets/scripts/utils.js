@@ -7,6 +7,18 @@ export function menuHandler(menu, action = null) {
     document.querySelector(menu).classList.toggle(action);
 }
 
+//Gerenciamento de alertas
+export function showAlert(message, type) {
+    document.querySelector("#alert").style.display = "flex";
+    document.querySelector("#alert").classList.add(type);
+    document.querySelector("#alert").innerHTML = message;
+}
+export function hideAlert(type) {
+    document.querySelector("#alert").style.display = "none";
+    document.querySelector("#alert").classList.remove(type);
+}
+
+
 //Verificador de inputs
 export function checkInput(input) {
     if (!input.value) {
@@ -57,4 +69,25 @@ export function getFormValues(form) {
     })
 
     return values
+}
+
+//Verificador de Login
+const menu = document.querySelector("#avatar");
+
+if (menu) {
+    const auth = firebase.auth();
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            console.log("Está logado");
+            menu.addEventListener("click", (e)=>{
+                auth.signOut();
+                window.location.href = "index.html";
+            })
+        } else {
+            console.log("Não está logado");
+            menu.addEventListener("click", (e)=>{
+                window.location.href = "login.html";
+            })
+        }
+    });
 }

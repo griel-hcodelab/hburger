@@ -5,9 +5,15 @@
         main {
             form {
                 div {
-                    &#errorField {
-                        @include components.error;
-                        display: none;
+                    &#alert {
+                        &.error {
+                            @include components.error;
+                            display: none;
+                        }
+                        &.success {
+                            @include components.success;
+                            display: none;    
+                        }
                     }
                 }
             }

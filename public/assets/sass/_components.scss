@@ -176,3 +176,11 @@
     border-radius: var(--space);
     margin: var(--space) 0;
 }
+@mixin success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: var(--space);
+    border-radius: var(--space);
+    margin: var(--space) 0;
+}
