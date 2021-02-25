@@ -90,4 +90,30 @@ if (menu) {
             })
         }
     });
+export function appendTemplate(element, tagName, html) {
+    const wrapElement = document.createElement(tagName)
+  
+    wrapElement.innerHTML = html
+  
+    element.append(wrapElement)
+  
+    return wrapElement
 }
+  
+export function formatPrice(value) {
+  
+    return parseFloat(value).toLocaleString('pt-br', {
+        style: 'currency',
+        currency: 'BRL'
+    })
+  
+}
+
+export function onSnapshotError(err) {
+
+    const pathname = encodeURIComponent(window.location.pathname);
+    const search = encodeURIComponent(window.location.search);
+
+    window.location.href = `/auth.html?url=${pathname}${search}`;
+
+}}
