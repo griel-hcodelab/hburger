@@ -8,6 +8,7 @@ let breadSelected = []
 let ingredientsSelected = []
 let hamburguersTray = []
 let trayNumber = 0
+let totalPriceAllBurguers = 0
 
 const renderLabelsBread = (context, labels) => {
   
@@ -47,12 +48,12 @@ const renderLabelsBread = (context, labels) => {
       } else {
 
         breadSelected = breadSelected.filter(id => {
-          return Number(id) !== Number(value);
+          return Number(id.id) !== Number(value);
         })
 
       }
 
-      const result = breadSelected.map(id => labels.filter(item => (+item.id === +id))[0])
+      const result = breadSelected.map(id => labels.filter(item => (+item.id === +id.id))[0])
 
       result.sort((a, b) => {
 
@@ -109,12 +110,12 @@ const renderLabelsIngredients = (context, labels) => {
       } else {
 
         ingredientsSelected = ingredientsSelected.filter(id => {
-          return Number(id) !== Number(value);
+          return Number(id.id) !== Number(value);
         })
 
       }
 
-      const result = ingredientsSelected.map(id => labels.filter(item => (+item.id === +id))[0])
+      const result = ingredientsSelected.map(id => labels.filter(item => (+item.id === +id.id))[0])
 
       result.sort((a, b) => {
 
@@ -170,7 +171,6 @@ const buttonSave = document.querySelector('#app > section > footer > button')
 
 buttonSave.addEventListener('click', (e) => {
 
-  
   let totalPrice = 0
   
   footerElement.classList.remove('show')
@@ -195,6 +195,8 @@ buttonSave.addEventListener('click', (e) => {
     trayEl.innerHTML = `${trayNumber} Hambúrguer`
   }
 
+  totalPriceAllBurguers = totalPriceAllBurguers + totalPrice
+
   const hamburgerElDad = document.querySelector('#app > aside > section > ul')
 
   hamburgerElDad.innerHTML = '';
@@ -214,6 +216,11 @@ buttonSave.addEventListener('click', (e) => {
     `);
 
   })
+
+  document.querySelector('#app > aside > footer > div.price').innerHTML = `
+    <small>Subtotal</small>
+    ${formatPrice(totalPriceAllBurguers)}
+  `
 
 })
 
