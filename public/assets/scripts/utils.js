@@ -1,7 +1,25 @@
+//Constantes Globais
+import firebase from './firebase-app';
+const auth = firebase.auth();
+
+//Gerenciador de menus
 export function menuHandler(menu, action = null) {
     document.querySelector(menu).classList.toggle(action);
 }
 
+//Verificador de inputs
+export function checkInput(input) {
+    if (!input.value) {
+        return false;
+    }
+}
+
+//Adicionar conteúdo à página
+export function appendTemplate(element, tagName, html){
+    const wrapElement = document.createElement(tagName);
+    wrapElement.innerHTML = html;
+    element.append(wrapElement);
+};
 //Pegando valor de um formulario e transformando em objetos
 export function getFormValues(form) {
 

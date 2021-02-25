@@ -835,4 +835,21 @@ body, div, section, main, article, header, footer, form, label {
   }
 }
 
+#app section main form div#errorField {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: var(--space);
+  border-radius: var(--space);
+  margin: var(--space) 0;
+  display: none;
+}
+#app section footer button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}
+#app section footer button:disabled:active {
+  background-color: inherit;
+}
+
 /*# sourceMappingURL=main.css.map */

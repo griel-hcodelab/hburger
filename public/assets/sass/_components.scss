@@ -167,3 +167,12 @@
         box-shadow: 0 0 5px var(--primary);
     }
 }
+
+@mixin error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: var(--space);
+    border-radius: var(--space);
+    margin: var(--space) 0;
+}

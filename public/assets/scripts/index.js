@@ -1,5 +1,7 @@
 import './firebase-app'
 import './main'
 import './utils'
+import './main'
+import './payment'
 import './auth'
 import './services'
