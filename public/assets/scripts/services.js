@@ -169,60 +169,63 @@ document.querySelectorAll("#app").forEach(page => {
 
 const buttonSave = document.querySelector('#app > section > footer > button')
 
-buttonSave.addEventListener('click', (e) => {
+if (buttonSave) {
+  buttonSave.addEventListener('click', (e) => {
 
-  let totalPrice = 0
+    let totalPrice = 0
+    
+    footerElement.classList.remove('show')
+    
+    const trayEl = document.querySelector('#app > aside > header > strong > small')
   
-  footerElement.classList.remove('show')
+    trayNumber = trayNumber + 1
+    
+    for (let i=0; i < breadSelected.length; i++) {
+      totalPrice += breadSelected[i].price
+    }
   
-  const trayEl = document.querySelector('#app > aside > header > strong > small')
-
-  trayNumber = trayNumber + 1
+    for (let i=0; i < ingredientsSelected.length; i++) {
+      totalPrice += ingredientsSelected[i].price
+    }
   
-  for (let i=0; i < breadSelected.length; i++) {
-    totalPrice += breadSelected[i].price
-  }
-
-  for (let i=0; i < ingredientsSelected.length; i++) {
-    totalPrice += ingredientsSelected[i].price
-  }
-
-  hamburguersTray.push({number: trayNumber, bread: breadSelected, ingredients: ingredientsSelected, totalPrice: totalPrice})
+    hamburguersTray.push({number: trayNumber, bread: breadSelected, ingredients: ingredientsSelected, totalPrice: totalPrice})
+    
+    if (trayNumber > 1) {
+      trayEl.innerHTML = `${trayNumber} Hambúrguers`
+    } else {
+      trayEl.innerHTML = `${trayNumber} Hambúrguer`
+    }
   
-  if (trayNumber > 1) {
-    trayEl.innerHTML = `${trayNumber} Hambúrguers`
-  } else {
-    trayEl.innerHTML = `${trayNumber} Hambúrguer`
-  }
-
-  totalPriceAllBurguers = totalPriceAllBurguers + totalPrice
-
-  const hamburgerElDad = document.querySelector('#app > aside > section > ul')
-
-  hamburgerElDad.innerHTML = '';
-
-  hamburguersTray.forEach(item => {
-
-    console.log(item.number)
-
-    const li = appendTemplate(hamburgerElDad, 'li', `
-      <div>Hamburguer ${item.number}</div>
-      <div>${formatPrice(item.totalPrice)}</div>
-      <button type="button" aria-label="Remover Hamburguer 1">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z" fill="black"/>
-          </svg>
-      </button>
-    `);
-
+    totalPriceAllBurguers = totalPriceAllBurguers + totalPrice
+  
+    const hamburgerElDad = document.querySelector('#app > aside > section > ul')
+  
+    hamburgerElDad.innerHTML = '';
+  
+    hamburguersTray.forEach(item => {
+  
+      console.log(item.number)
+  
+      const li = appendTemplate(hamburgerElDad, 'li', `
+        <div>Hamburguer ${item.number}</div>
+        <div>${formatPrice(item.totalPrice)}</div>
+        <button type="button" aria-label="Remover Hamburguer 1">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z" fill="black"/>
+            </svg>
+        </button>
+      `);
+  
+    })
+  
+    document.querySelector('#app > aside > footer > div.price').innerHTML = `
+      <small>Subtotal</small>
+      ${formatPrice(totalPriceAllBurguers)}
+    `
+  
   })
+}
 
-  document.querySelector('#app > aside > footer > div.price').innerHTML = `
-    <small>Subtotal</small>
-    ${formatPrice(totalPriceAllBurguers)}
-  `
-
-})
 
 
 
