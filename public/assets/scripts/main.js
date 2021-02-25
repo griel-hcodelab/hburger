@@ -7,7 +7,7 @@ document.querySelectorAll("#app").forEach(page => {
   const aside = page.querySelector("aside");
   if (aside) {
     aside.addEventListener("click", (e)=>{
-      menuHandler(aside, "open");
+      menuHandler("aside", "open");
     })
   }
 

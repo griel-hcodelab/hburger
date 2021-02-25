@@ -26,12 +26,6 @@ export function checkInput(input) {
     }
 }
 
-//Adicionar conteúdo à página
-export function appendTemplate(element, tagName, html){
-    const wrapElement = document.createElement(tagName);
-    wrapElement.innerHTML = html;
-    element.append(wrapElement);
-};
 //Pegando valor de um formulario e transformando em objetos
 export function getFormValues(form) {
 
@@ -90,6 +84,7 @@ if (menu) {
             })
         }
     });
+}
 export function appendTemplate(element, tagName, html) {
     const wrapElement = document.createElement(tagName)
   
@@ -116,4 +111,4 @@ export function onSnapshotError(err) {
 
     window.location.href = `/auth.html?url=${pathname}${search}`;
 
-}}
+}
