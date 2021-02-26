@@ -9,6 +9,7 @@ let ingredientsSelected = []
 let hamburguersTray = []
 let trayNumber = 0
 let totalPriceAllBurguers = 0
+var buttonDelete;
 
 const renderLabelsBread = (context, labels) => {
   
@@ -52,20 +53,6 @@ const renderLabelsBread = (context, labels) => {
         })
 
       }
-
-      const result = breadSelected.map(id => labels.filter(item => (+item.id === +id.id))[0])
-
-      result.sort((a, b) => {
-
-        if (a.name > b.name) {
-          return 1;
-        } else if (a.name < b.name) {
-          return -1;
-        } else {
-          return 0;
-        }
-
-      });
 
     })
 
@@ -115,20 +102,6 @@ const renderLabelsIngredients = (context, labels) => {
 
       }
 
-      const result = ingredientsSelected.map(id => labels.filter(item => (+item.id === +id.id))[0])
-
-      result.sort((a, b) => {
-
-        if (a.name > b.name) {
-          return 1;
-        } else if (a.name < b.name) {
-          return -1;
-        } else {
-          return 0;
-        }
-
-      });
-
     })
 
   })
@@ -169,63 +142,108 @@ document.querySelectorAll("#app").forEach(page => {
 
 const buttonSave = document.querySelector('#app > section > footer > button')
 
-if (buttonSave) {
-  buttonSave.addEventListener('click', (e) => {
+function saveBurguer() {
+  let totalPrice = 0
+  
+  footerElement.classList.remove('show')
+  
+  const trayEl = document.querySelector('#app > aside > header > strong > small')
 
-    let totalPrice = 0
-    
-    footerElement.classList.remove('show')
-    
-    const trayEl = document.querySelector('#app > aside > header > strong > small')
+  trayNumber = trayNumber + 1
   
-    trayNumber = trayNumber + 1
-    
-    for (let i=0; i < breadSelected.length; i++) {
-      totalPrice += breadSelected[i].price
-    }
+  for (let i=0; i < breadSelected.length; i++) {
+    totalPrice += breadSelected[i].price
+  }
+
+  for (let i=0; i < ingredientsSelected.length; i++) {
+    totalPrice += ingredientsSelected[i].price
+  }
+
+  hamburguersTray.push({number: trayNumber, bread: breadSelected, ingredients: ingredientsSelected, totalPrice: totalPrice})
   
-    for (let i=0; i < ingredientsSelected.length; i++) {
-      totalPrice += ingredientsSelected[i].price
-    }
-  
-    hamburguersTray.push({number: trayNumber, bread: breadSelected, ingredients: ingredientsSelected, totalPrice: totalPrice})
-    
-    if (trayNumber > 1) {
-      trayEl.innerHTML = `${trayNumber} Hambúrguers`
-    } else {
-      trayEl.innerHTML = `${trayNumber} Hambúrguer`
-    }
-  
-    totalPriceAllBurguers = totalPriceAllBurguers + totalPrice
-  
-    const hamburgerElDad = document.querySelector('#app > aside > section > ul')
-  
-    hamburgerElDad.innerHTML = '';
-  
-    hamburguersTray.forEach(item => {
-  
-      console.log(item.number)
-  
-      const li = appendTemplate(hamburgerElDad, 'li', `
+  if (trayNumber > 1) {
+    trayEl.innerHTML = `${trayNumber} Hambúrguers`
+  } else {
+    trayEl.innerHTML = `${trayNumber} Hambúrguer`
+  }
+
+  totalPriceAllBurguers = totalPriceAllBurguers + totalPrice
+
+  const hamburgerElDad = document.querySelector('#app > aside > section > ul')
+
+  hamburgerElDad.innerHTML = '';
+
+  hamburguersTray.forEach(item => {
+
+    appendTemplate(hamburgerElDad, 'li', `
+      <div>Hamburguer ${item.number}</div>
+      <div>${formatPrice(item.totalPrice)}</div>
+      <button type="button" aria-label="Remover Hamburguer ${item.number}" id="${item.number}">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z" fill="black"/>
+          </svg>
+      </button>
+    `);
+
+  })
+
+  document.querySelector('#app > aside > footer > div.price').innerHTML = `
+    <small>Subtotal</small>
+    ${formatPrice(totalPriceAllBurguers)}
+  `
+
+}
+
+if (buttonSave) {
+  buttonSave.addEventListener('click', () => {
+    saveBurguer()
+    renderBurguers()
+  })
+}
+
+function renderBurguers() {
+
+  buttonDelete = document.querySelectorAll('#app > aside > section > ul > li > button')
+
+  // console.log(buttonDelete)
+
+  hamburguersTray
+    .map(id => hamburguersTray
+    .filter(item => Number(item.id) === Number(id)[0]))
+    .sort((a, b) => {
+
+      if (a.name > b.name) {
+        return 1;
+      } else if (a.name < b.name) {
+        return -1;
+      } else {
+        return 0;
+      }
+
+    })
+    .forEach(item => {
+
+      console.log(item)
+
+      const hamburgerElDad = document.querySelector('#app > aside > section > ul')
+
+      hamburgerElDad.innerHTML = '';
+
+      appendTemplate(hamburgerElDad, 'li', `
         <div>Hamburguer ${item.number}</div>
         <div>${formatPrice(item.totalPrice)}</div>
-        <button type="button" aria-label="Remover Hamburguer 1">
+        <button type="button" aria-label="Remover Hamburguer ${item.number}" id="${item.number}">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z" fill="black"/>
             </svg>
         </button>
       `);
-  
+
     })
-  
-    document.querySelector('#app > aside > footer > div.price').innerHTML = `
-      <small>Subtotal</small>
-      ${formatPrice(totalPriceAllBurguers)}
-    `
-  
-  })
+
 }
 
 
-
-
+document.querySelector('#app > aside > footer > button').addEventListener('click', () => {
+  window.location.href = '/pay.html'
+})
