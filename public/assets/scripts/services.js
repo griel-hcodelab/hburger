@@ -14,7 +14,9 @@ const renderLabelsBread = (context, labels) => {
   
   const labelsElBread = context.querySelector('#bread ul')
 
-  labelsElBread.innerHTML = '';
+  if (labelsElBread) {
+    labelsElBread.innerHTML = '';
+  }
 
   labels.forEach(item => {
 
