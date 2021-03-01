@@ -88,15 +88,23 @@ const saveOrder = (q, v)=>{
 
     auth.onAuthStateChanged(user => {
         if (user) {
-            
-            const pedidos = db.collection("pedidos").doc(Math.random().toString(36).substring(2));
 
+            
             const data = new Date();
+            const year = data.getFullYear().toString();
+            const month = data.getMonth().toString();
+            const day = data.getDate().toString();
+            const hour = data.getHours().toString();
+            const minute = data.getMinutes().toString();
+            const second = data.getSeconds().toString();
+            let orderID = year + month + day + hour + minute + second;
+            
+            const pedidos = db.collection("pedidos").doc(orderID);
         
             pedidos.set({
                 cliente_id: user.uid,
                 data: `${data.getDate()}/${data.getMonth()+1}/${data.getFullYear()}`,
-                id: Math.random().toString(36).substring(2),
+                id: parseInt(orderID),
                 itens: q,//uantity
                 valor: v//alue
         

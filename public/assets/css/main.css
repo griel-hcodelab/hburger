@@ -751,6 +751,44 @@ body, div, section, main, article, header, footer, form, label {
   flex-direction: row;
   display: flex;
   color: var(--dark);
+  /* Roberto */
+  overflow: hidden;
+  /* */
+}
+#list-orders > li .confirm {
+  color: #000;
+  text-align: center;
+  z-index: 445;
+  transform: translate(0px, 0px);
+  background-color: #ff000063;
+  height: 200px;
+  width: 0px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px 0 0 10px;
+  transition: 1s;
+  position: relative;
+  left: -280px;
+}
+#list-orders > li .confirm button {
+  border-radius: var(--radius);
+  border: 0;
+  background-color: #ff1b1b;
+  margin: 10px;
+  height: 35px;
+  outline: none;
+  color: #FFF;
+  font-weight: bold;
+  cursor: pointer;
+}
+#list-orders > li .confirm button.confirmYes:hover {
+  background-color: #fd0909;
+}
+#list-orders > li .confirm button.confirmNo {
+  background-color: green;
+}
+#list-orders > li .confirm button.confirmNo:hover {
+  background-color: #015d01;
 }
 #list-orders > li > div {
   padding: 10px;
