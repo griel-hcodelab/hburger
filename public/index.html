@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="shortcut icon" href="assets/images/logo-favicon-red.svg" type="image/x-icon" />
 </head>
-<body id="app">
+<body id="app" class="carte">
 
     <section>
 
@@ -25,20 +25,101 @@
                 <h1>Monte o seu <span>Hburger</span></h1>
             </header>
             <section>
-                <div class="category" id="bread">
-                    <h2>Escolha o pão <small>(escolha apenas um)</small></h2>
-                    <ul></ul>
+                <div class="category">
+                    <h2>Escolha seu H-Burger</h2>
+                    <ul class="burger">
+                        
+                    </ul>
                 </div>
-                <div class="category" id="ingredients">
-                    <h2>Ingredientes</h2>
-                    <ul></ul>
+                <div class="category">
+                    <h2>Quer um pão diferente? <small>(escolha apenas um)</small></h2>
+                    <ul class="bread">
+                        
+                    </ul>
+                </div>
+                <div class="category">
+                    <h2>Quer turbinar seu lanche? <small>(escolha a vontade!)</small></h2>
+                    <ul class="aditionals">
+                        <!--<li>
+                            <label>
+                                <input type="checkbox" name="item" />
+                                <span></span>
+                                <h3>Carne Bovina 125g</h3>
+                                <div>R$ 3,00</div>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="item" />
+                                <span></span>
+                                <h3>Carne de Frango 125g</h3>
+                                <div>R$ 2,50</div>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="item" />
+                                <span></span>
+                                <h3>Carne de Peixe 125g</h3>
+                                <div>R$ 2,00</div>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="item" />
+                                <span></span>
+                                <h3>Carne Bovina 125g</h3>
+                                <div>R$ 3,00</div>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="item" />
+                                <span></span>
+                                <h3>Carne de Frango 125g</h3>
+                                <div>R$ 2,50</div>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="item" />
+                                <span></span>
+                                <h3>Carne de Peixe 125g</h3>
+                                <div>R$ 2,00</div>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="item" />
+                                <span></span>
+                                <h3>Carne Bovina 125g</h3>
+                                <div>R$ 3,00</div>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="item" />
+                                <span></span>
+                                <h3>Carne de Frango 125g</h3>
+                                <div>R$ 2,50</div>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="item" />
+                                <span></span>
+                                <h3>Carne de Peixe 125g</h3>
+                                <div>R$ 2,00</div>
+                            </label>
+                        </li>-->
+                    </ul>
                 </div>
             </section>
         </main>
 
         <!--<footer class="show">-->
         <footer>
-            <button type="button" aria-label="Salvar Hamburguer">Salvar Hamburguer</button>
+            <button type="button" id="saveBurger" aria-label="Salvar Hamburguer">Salvar Hamburguer</button>
         </footer>
 
     </section>
@@ -49,11 +130,11 @@
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M50.6667 8H13.3067C10.3467 8 8.02667 10.3733 8.02667 13.3333L8 50.6667C8 53.6 10.3467 56 13.3067 56H50.6667C53.6 56 56 53.6 56 50.6667V13.3333C56 10.3733 53.6 8 50.6667 8ZM50.6667 40H40C40 44.4267 36.4 48 32 48C27.6 48 24 44.4267 24 40H13.3067V13.3333H50.6667V40Z" fill="#070D0D"/>
             </svg>                
-            <strong>Bandeja<small></small></strong>
+            <strong>Bandeja<small>2 hamburguers</small></strong>
         </header>
         <section>
             <ul>
-                <!-- <li>
+                <li>
                     <div>Hamburguer 1</div>
                     <div>R$ 15,00</div>
                     <button type="button" aria-label="Remover Hamburguer 1">
@@ -61,8 +142,8 @@
                             <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z" fill="black"/>
                         </svg>
                     </button>
-                </li> -->
-                <!-- <li>
+                </li>
+                <li>
                     <div>Hamburguer 2</div>
                     <div>R$ 15,00</div>
                     <button type="button" aria-label="Remover Hamburguer 2">
@@ -70,7 +151,7 @@
                             <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z" fill="black"/>
                         </svg>
                     </button>
-                </li> -->
+                </li>
             </ul>
         </section>
         <footer>
@@ -82,7 +163,7 @@
                 <span>Esconder Bandeja</span>
             </div>
 
-            <div class="price"><small>Subtotal</small>R$ 0,00</div>
+            <div class="price"><small>Subtotal</small>R$ 49,95</div>
 
             <button type="button" aria-label="Pagar">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -15,7 +15,6 @@ if (order) {
         const renderOrder = (orders = [])=>{
             const ul = page.querySelector("#list-orders");
     
-            console.log("rodou a função", orders)
             ul.innerHTML = '';
 
             orders.forEach((item)=>{
