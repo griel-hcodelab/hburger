@@ -1,6 +1,7 @@
 import firebase from './firebase-app'
 import { appendTemplate, formatPrice } from './utils';
 const db = firebase.firestore();
+const auth = firebase.auth();
 
 const order = document.querySelectorAll(".orders");
 
@@ -13,6 +14,9 @@ if (order) {
         let btnDeleteRevert;
 
         const renderOrder = (orders = [])=>{
+
+            console.log(orders);
+
             const ul = page.querySelector("#list-orders");
     
             ul.innerHTML = '';
@@ -119,21 +123,27 @@ if (order) {
             });
         }
     
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                db.collection(`pedidos/${user.uid}/orders`).onSnapshot(snapshot => {
     
-        db.collection("pedidos").onSnapshot(snapshot => {
-    
-            const orders = [];
+                    const orders = [];
+                
+                    snapshot.forEach(item => {
+                
+                      orders.push(item.data());
         
-            snapshot.forEach(item => {
-        
-              orders.push(item.data());
-        
-            })
-        
-            renderOrder(orders);
-        
+                      console.log(item.data())
+                
+                    })
+                
+                    renderOrder(orders);
+                
+                });
+            }
         });
-
+        
+        
 
 
         

@@ -99,7 +99,7 @@ const saveOrder = (q, v)=>{
             const second = data.getSeconds().toString();
             let orderID = year + month + day + hour + minute + second;
             
-            const pedidos = db.collection("pedidos").doc(orderID);
+            const pedidos = db.collection(`pedidos/${user.uid}/orders`).doc(orderID);
         
             pedidos.set({
                 cliente_id: user.uid,
