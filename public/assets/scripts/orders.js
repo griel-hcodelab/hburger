@@ -5,7 +5,7 @@ const auth = firebase.auth();
 
 const order = document.querySelectorAll(".orders");
 
-
+let userLogged;
 
 if (order) {
     order.forEach((page)=>{
@@ -13,6 +13,29 @@ if (order) {
         let btnDeleteConfirm;
         let btnDeleteRevert;
 
+        auth.onAuthStateChanged(user => {
+            if (user) {
+
+                userLogged = user.uid;
+
+                db.collection(`pedidos/${userLogged}/orders`).onSnapshot(snapshot => {
+    
+                    const orders = [];
+                
+                    snapshot.forEach(item => {
+                
+                      orders.push(item.data());
+                
+                    })
+                
+                    renderOrder(orders);
+                
+                });
+            } else {
+                window.location.href = "login.html";
+            }
+        });
+        
         const renderOrder = (orders = [])=>{
 
             console.log(orders);
@@ -116,34 +139,12 @@ if (order) {
         }
 
         const deleteOrder = (orderID)=>{
-            db.collection("pedidos").doc(orderID).delete().then(() => {
+            db.collection(`pedidos/${userLogged}/orders`).doc(orderID).delete().then(() => {
                 window.location.reload();
             }).catch((error) => {
                 console.error("Error removing document: ", error);
             });
         }
-    
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                db.collection(`pedidos/${user.uid}/orders`).onSnapshot(snapshot => {
-    
-                    const orders = [];
-                
-                    snapshot.forEach(item => {
-                
-                      orders.push(item.data());
-        
-                      console.log(item.data())
-                
-                    })
-                
-                    renderOrder(orders);
-                
-                });
-            }
-        });
-        
-        
 
 
         

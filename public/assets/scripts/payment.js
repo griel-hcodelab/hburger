@@ -2,8 +2,8 @@ import IMask from 'imask';
 import { checkInput, hideAlert, showAlert, verifyLogin } from './utils';
 import firebase from './firebase-app';
 
-const auth = firebase.auth();
 const db = firebase.firestore();
+const auth = firebase.auth();
 
 document.querySelectorAll("#app").forEach((page)=>{
     auth.onAuthStateChanged(user => {
