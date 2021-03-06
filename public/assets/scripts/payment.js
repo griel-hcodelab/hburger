@@ -2,8 +2,8 @@ import IMask from 'imask';
 import { checkInput, hideAlert, showAlert, verifyLogin } from './utils';
 import firebase from './firebase-app';
 
-const auth = firebase.auth();
 const db = firebase.firestore();
+const auth = firebase.auth();
 
 document.querySelectorAll("#app").forEach((page)=>{
     auth.onAuthStateChanged(user => {
@@ -16,8 +16,12 @@ document.querySelectorAll("#app").forEach((page)=>{
             const installments = page.querySelector("[name=installments]")
             const saveOrderBtn = page.querySelector("#paymentBtn");
 
-            let quantity = 2;
-            let value = parseFloat(129.90);
+            console.log(sessionStorage.getItem('price'))
+
+            
+
+            let quantity = sessionStorage.getItem('items');
+            let value = parseFloat(sessionStorage.getItem('price'));
 
             if (inputs) {
                 inputs.forEach((input)=>{ 
@@ -99,7 +103,7 @@ const saveOrder = (q, v)=>{
             const second = data.getSeconds().toString();
             let orderID = year + month + day + hour + minute + second;
             
-            const pedidos = db.collection("pedidos").doc(orderID);
+            const pedidos = db.collection(`pedidos/${user.uid}/orders`).doc(orderID);
         
             pedidos.set({
                 cliente_id: user.uid,
