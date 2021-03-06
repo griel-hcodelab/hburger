@@ -15,7 +15,6 @@ if (index) {
         auth.onAuthStateChanged(user => {
             if (user) {
                 userID = user.uid;
-                console.log(user.uid)
                 renderTray()
             }
         })
@@ -237,11 +236,8 @@ if (index) {
                 snapshot.forEach((item)=>{
                     let deleteTrayId = item.data().trayID;
 
-                    console.log(deleteTrayId)
-
                     db.collection(`pedidos/${userID}/bandeja`).doc(deleteTrayId.toString()).delete()
                     .then(() => {
-                        console.log('apagou')
                         page.querySelector("aside > section > ul").innerHTML = "<img src='../assets/images/loading.svg' /><br/><p>Recebemos o seu pedido! Agora, você será direcionado ao pagamento.</p>";
                     }).catch((error) => {
                         console.error("Error removing document: ", error);

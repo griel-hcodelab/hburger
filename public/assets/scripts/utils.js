@@ -72,13 +72,11 @@ if (menu) {
     const auth = firebase.auth();
     auth.onAuthStateChanged(user => {
         if (user) {
-            console.log("Está logado");
             menu.addEventListener("click", (e)=>{
                 auth.signOut();
                 window.location.href = "index.html";
             })
         } else {
-            console.log("Não está logado");
             menu.addEventListener("click", (e)=>{
                 window.location.href = "login.html";
             })
