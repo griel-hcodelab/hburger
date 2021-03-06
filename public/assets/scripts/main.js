@@ -1,23 +1,16 @@
 //Imports
 import firebase from './firebase-app';
+import { menuHandler } from './utils';
 
 document.querySelectorAll("#app").forEach(page => {
 
-  const aside = page.querySelector("aside")
-  const buttonOpenAside = page.querySelector("aside header")
-  const closeAside = page.querySelector("footer .close")
-
-  if (buttonOpenAside) {
-    buttonOpenAside.addEventListener("click", e => {
-        aside.classList.add("open")
+  const aside = page.querySelector("aside");
+  if (aside) {
+    aside.addEventListener("click", (e)=>{
+      menuHandler("aside", "open");
     })
   }
 
-  if(closeAside) {
-    closeAside.addEventListener("click", e => {
-      aside.classList.remove("open")
-    })
-  }
 
 })
 

@@ -1,0 +1,33 @@
+@use 'components';
+
+#app {
+    section {
+        main {
+            form {
+                div {
+                    &#alert {
+                        &.error {
+                            @include components.error;
+                            display: none;
+                        }
+                        &.success {
+                            @include components.success;
+                            display: none;    
+                        }
+                    }
+                }
+            }
+        }
+        footer {
+            button {
+                &:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed!important;
+                    &:active {
+                        background-color: inherit;
+                    }
+                }
+            }
+        }
+    }
+}
