@@ -93,6 +93,8 @@ if (index) {
             })
             renderAditionals(aditionals);
         });
+
+
         //Atualizando Campos
         const updateFields = ()=>{
             labels.push(page.querySelectorAll(".category li"));
@@ -100,7 +102,6 @@ if (index) {
         }
 
         const saveTray = ()=>{
-            console.log("chegou no rendertray")
             db.collection(`pedidos/${userID}/bandeja`).onSnapshot(snapshot => {
                 const burger = [];
 
@@ -147,7 +148,7 @@ if (index) {
             
             });
         }
-
+        saveTray();
 
 
 
@@ -185,6 +186,7 @@ if (index) {
             .then(() => {
                 console.log("Deu erto")
                 saveTray();
+                //window.location.reload();
             })
             .catch((error) => {
                 console.error("Error writing document: ", error);
