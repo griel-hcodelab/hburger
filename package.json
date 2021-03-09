@@ -12,7 +12,7 @@
     "url": "git+https://github.com/hcode-courses/lab-hburguer.git"
   },
   "keywords": [],
-  "author": "Hcode Lab",
+  "author": "Hcode Lab", 
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/hcode-courses/lab-hburguer/issues"
