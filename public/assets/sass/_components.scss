@@ -95,24 +95,28 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 45px;
+  z-index: 4;
   #logo-icon {
     width: 100px;
     height: 127px;
   }
   #logo-text {
     margin-top: var(--space);
-    width: 320px;
+    width: 220px;
     height: 60px;
   }
   @media (min-width: vars.$desktopStartWidth) {
     flex-direction: row;
+    width: 75%;
+    height: 300px;
     #logo-icon {
-      width: initial;
+      width: 150px;
+      height: 195px;
     }
     #logo-text {
       margin-left: var(--space);
-      width: initial;
+      width: 330px;
+      height: 90px;
     }
   }
 }

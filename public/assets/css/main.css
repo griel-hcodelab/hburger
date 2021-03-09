@@ -736,7 +736,7 @@ body, div, section, main, article, header, footer, form, label {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 45px;
+  z-index: 4;
 }
 #new > section > header a #logo-icon {
   width: 100px;
@@ -744,19 +744,23 @@ body, div, section, main, article, header, footer, form, label {
 }
 #new > section > header a #logo-text {
   margin-top: var(--space);
-  width: 320px;
+  width: 220px;
   height: 60px;
 }
 @media (min-width: 768px) {
   #new > section > header a {
     flex-direction: row;
+    width: 75%;
+    height: 300px;
   }
   #new > section > header a #logo-icon {
-    width: initial;
+    width: 150px;
+    height: 195px;
   }
   #new > section > header a #logo-text {
     margin-left: var(--space);
-    width: initial;
+    width: 330px;
+    height: 90px;
   }
 }
 #new > section > header::before {
@@ -772,7 +776,7 @@ body, div, section, main, article, header, footer, form, label {
   filter: brightness(0.8);
 }
 #new > section > header a {
-  position: relative;
+  margin-top: 50px;
 }
 #new > section > header #avatar {
   position: absolute;
@@ -826,6 +830,23 @@ body, div, section, main, article, header, footer, form, label {
 @media (min-width: 768px) {
   #new {
     flex-direction: row;
+  }
+  #new section header div {
+    height: 150px;
+  }
+  #new section header div small.one {
+    text-transform: uppercase;
+    font-size: 34px;
+  }
+  #new section header div small.two {
+    margin-top: 10px;
+    font-size: 58px;
+  }
+  #new section header a#btnIndex {
+    width: 30%;
+    height: 70px;
+    margin-top: 60px;
+    font-size: 28px;
   }
 }
 
