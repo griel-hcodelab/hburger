@@ -267,7 +267,7 @@ body, div, section, main, article, header, footer, form, label {
 }
 #app > section main > header {
   background-color: var(--white10);
-  height: 80px;
+  height: 100px;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -279,6 +279,22 @@ body, div, section, main, article, header, footer, form, label {
 }
 #app > section main > header h1 span {
   color: var(--primary);
+}
+#app > section main > header > div {
+  width: 300px;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+#app > section main > header > div label {
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+#app > section main > header > div input {
+  border-radius: var(--radius);
+  text-transform: uppercase;
+  width: 90%;
 }
 #app > section main > section {
   height: calc(100vh - 494px);
@@ -716,6 +732,137 @@ body, div, section, main, article, header, footer, form, label {
 @media (min-width: 768px) {
   #app {
     flex-direction: row;
+  }
+}
+
+#new.no-footer > section main {
+  padding-bottom: 0;
+}
+#new > section {
+  flex: 1;
+}
+#new > section > header {
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+#new > section > header a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+}
+#new > section > header a #logo-icon {
+  width: 100px;
+  height: 127px;
+}
+#new > section > header a #logo-text {
+  margin-top: var(--space);
+  width: 220px;
+  height: 60px;
+}
+@media (min-width: 768px) {
+  #new > section > header a {
+    flex-direction: row;
+    width: 75%;
+    height: 300px;
+  }
+  #new > section > header a #logo-icon {
+    width: 150px;
+    height: 195px;
+  }
+  #new > section > header a #logo-text {
+    margin-left: var(--space);
+    width: 330px;
+    height: 90px;
+  }
+}
+#new > section > header::before {
+  position: absolute;
+  top: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-position: top center;
+  background-image: linear-gradient(180deg, rgba(7, 13, 13, 0.5) 50.52%, #070D0D 100%), url("../images/photo-red.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: brightness(0.8);
+}
+#new > section > header a {
+  margin-top: 50px;
+}
+#new > section > header #avatar {
+  position: absolute;
+  top: var(--space);
+  right: var(--space);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.5));
+  cursor: pointer;
+}
+#new > section > header #avatar:hover {
+  opacity: 0.8;
+  filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.5));
+}
+#new > section > header div {
+  margin-top: 40px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+#new > section > header div small.one {
+  text-transform: uppercase;
+  font-size: 24px;
+  color: white;
+}
+#new > section > header div small.two {
+  text-transform: uppercase;
+  font-size: 40px;
+  color: white;
+}
+#new > section > header a {
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+#new > section > header a#btnIndex {
+  width: 250px;
+  height: 50px;
+  margin-top: 60px;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  background-color: red;
+  font-size: 18px;
+  color: white;
+  z-index: 3;
+}
+@media (min-width: 768px) {
+  #new {
+    flex-direction: row;
+  }
+  #new section header div {
+    height: 150px;
+  }
+  #new section header div small.one {
+    text-transform: uppercase;
+    font-size: 34px;
+  }
+  #new section header div small.two {
+    margin-top: 10px;
+    font-size: 58px;
+  }
+  #new section header a#btnIndex {
+    width: 400px;
+    height: 70px;
+    margin-top: 60px;
+    font-size: 28px;
   }
 }
 
