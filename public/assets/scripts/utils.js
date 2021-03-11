@@ -3,9 +3,14 @@ import firebase from './firebase-app';
 const auth = firebase.auth();
 
 //Gerenciador de menus
-export function menuHandler(menu, action = null) {
-    document.querySelector(menu).classList.toggle(action);
+export function menuHandlerAdd(menu, action = null) {
+    document.querySelector(menu).classList.add(action);
 }
+
+export function menuHandlerRemove(menu, action = null) {
+    document.querySelector(menu).classList.remove(action);
+}
+
 
 //Gerenciamento de alertas
 export function showAlert(message, type) {
@@ -72,9 +77,13 @@ if (menu) {
     const auth = firebase.auth();
     auth.onAuthStateChanged(user => {
         if (user) {
+            if (user.photoURL) {
+                document.querySelector("header > img#avatar").src = user.photoURL;
+            }
             menu.addEventListener("click", (e)=>{
-                auth.signOut();
-                window.location.href = "index.html";
+                //auth.signOut();
+                //window.location.href = "index.html";
+                document.querySelector(".profile-menu").classList.toggle("show");
             })
         } else {
             menu.addEventListener("click", (e)=>{
@@ -83,6 +92,15 @@ if (menu) {
         }
     });
 }
+//Signout
+const signout = document.querySelector(".signout");
+if (signout) {
+    const auth = firebase.auth();
+    auth.signOut();
+    //window.location.href = "index.html";
+}//
+
+
 export function appendTemplate(element, tagName, html) {
     const wrapElement = document.createElement(tagName)
   
