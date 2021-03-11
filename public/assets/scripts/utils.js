@@ -72,7 +72,7 @@ if (menu) {
     const auth = firebase.auth();
     auth.onAuthStateChanged(user => {
         if (user) {
-            console.log("Está logado");
+            document.querySelector("header > img#avatar").src = user.photoURL;
             menu.addEventListener("click", (e)=>{
                 auth.signOut();
                 window.location.href = "index.html";
