@@ -900,9 +900,21 @@ body, div, section, main, article, header, footer, form, label {
   background-color: inherit;
 }
 
+.change-photo .toast {
+  position: fixed;
+  bottom: -80px;
+  left: 0;
+  z-index: 3;
+}
+.change-photo .toast.open {
+  bottom: 0;
+}
 .change-photo form {
   align-items: center;
   margin-top: var(--space);
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
 }
 .change-photo form img {
   width: 200px;
@@ -929,6 +941,15 @@ body, div, section, main, article, header, footer, form, label {
   border-radius: var(--radius);
   background: var(--primary);
   color: var(--white);
+  transition: opacity 0.2s ease-in-out;
+}
+.change-photo form .choose-photo:hover {
+  opacity: 0.8;
+}
+.change-photo form.cropping img {
+  height: auto;
+  border-radius: 0;
+  margin-top: 0;
 }
 .change-photo form .fixed {
   align-items: flex-start;
@@ -952,6 +973,10 @@ body, div, section, main, article, header, footer, form, label {
   border-radius: var(--radius);
   background: var(--white);
   color: var(--primary);
+  transition: opacity 0.2s ease-in-out;
+}
+.change-photo form .fixed button:hover {
+  opacity: 0.8;
 }
 
 @media (min-width: 1200px) {
