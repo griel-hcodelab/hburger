@@ -16,10 +16,6 @@ document.querySelectorAll("#app").forEach((page)=>{
             const installments = page.querySelector("[name=installments]")
             const saveOrderBtn = page.querySelector("#paymentBtn");
 
-            console.log(sessionStorage.getItem('price'))
-
-            
-
             let quantity = sessionStorage.getItem('items');
             let value = parseFloat(sessionStorage.getItem('price'));
 

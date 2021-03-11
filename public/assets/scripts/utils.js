@@ -3,9 +3,14 @@ import firebase from './firebase-app';
 const auth = firebase.auth();
 
 //Gerenciador de menus
-export function menuHandler(menu, action = null) {
-    document.querySelector(menu).classList.toggle(action);
+export function menuHandlerAdd(menu, action = null) {
+    document.querySelector(menu).classList.add(action);
 }
+
+export function menuHandlerRemove(menu, action = null) {
+    document.querySelector(menu).classList.remove(action);
+}
+
 
 //Gerenciamento de alertas
 export function showAlert(message, type) {
@@ -78,7 +83,6 @@ if (menu) {
                 window.location.href = "index.html";
             })
         } else {
-            console.log("Não está logado");
             menu.addEventListener("click", (e)=>{
                 window.location.href = "login.html";
             })

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="2">
+
+  <testsuite name="authentication"
+    errors="0" failures="0" hostname="" id="" package="authentication" skipped="0"
+    tests="2" time="7.026" timestamp="">
+  
+    <testcase name="Acessando a página de autenticação" classname="authentication" time="4.019" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Cadastrando um usuario" classname="authentication" time="3.007" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>

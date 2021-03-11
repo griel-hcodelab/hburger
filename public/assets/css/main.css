@@ -900,4 +900,129 @@ body, div, section, main, article, header, footer, form, label {
   background-color: inherit;
 }
 
+.change-photo .toast {
+  position: fixed;
+  bottom: -80px;
+  left: 0;
+  z-index: 3;
+}
+.change-photo .toast.open {
+  bottom: 0;
+}
+.change-photo form {
+  align-items: center;
+  margin-top: var(--space);
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+}
+.change-photo form img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+.change-photo form #file {
+  display: none;
+}
+.change-photo form .choose-photo {
+  margin: var(--space) 0;
+  min-width: 176px;
+  border: none;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--white);
+  transition: opacity 0.2s ease-in-out;
+}
+.change-photo form .choose-photo:hover {
+  opacity: 0.8;
+}
+.change-photo form.cropping img {
+  height: auto;
+  border-radius: 0;
+  margin-top: 0;
+}
+.change-photo form .fixed {
+  align-items: flex-start;
+  padding-left: var(--space);
+  width: 100%;
+}
+.change-photo form .fixed button {
+  margin: var(--space) 0;
+  min-width: 176px;
+  border: none;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--primary);
+  transition: opacity 0.2s ease-in-out;
+}
+.change-photo form .fixed button:hover {
+  opacity: 0.8;
+}
+
+@media (min-width: 1200px) {
+  .change-photo form img {
+    width: 256px;
+    height: 256px;
+  }
+}
+.toast {
+  position: relative;
+  height: 80px;
+  width: 100%;
+  justify-content: center;
+  padding: var(--space);
+  border: 1px solid transparent;
+  transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
+  font-size: 20px;
+}
+.toast .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  font-size: 32px;
+  transition: 0.3s;
+  color: var(--dark);
+  min-width: 50px;
+  height: 50px;
+  margin: 15px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.toast .close:hover {
+  color: var(--black);
+}
+.toast.success {
+  color: var(--dark);
+  border-color: var(--light);
+  background-color: var(--light);
+}
+.toast.danger {
+  color: var(--dark);
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
 /*# sourceMappingURL=main.css.map */
