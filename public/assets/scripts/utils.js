@@ -2,6 +2,9 @@
 import firebase from './firebase-app';
 const auth = firebase.auth();
 
+console.log("%cSeja bem vindo ao Console do H-Burger Red Team.", "color: #FFF; text-align: center; font-family: sans-serif; font-size: 20px; font-weight: bolder; text-shadow: #000 1px 1px;");
+console.log("%cAo menos que você saiba o que tem aqui, não digite nenhum comando ou faça nenhuma ação nessa área.", "color: red; font-family: sans-serif; font-size: 20px; font-weight: bolder; text-shadow: #000 1px 1px;");
+
 //Gerenciador de menus
 export function menuHandlerAdd(menu, action = null) {
     document.querySelector(menu).classList.add(action);
@@ -127,4 +130,26 @@ export function onSnapshotError(err) {
 
     window.location.href = `/auth.html?url=${pathname}${search}`;
 
+}
+
+export function setFormValues(form, values) {
+    Object.keys(values).forEach((key) => {
+        const field = form.querySelector(`[name=${key}]`);
+
+        switch (field.type) {
+            case "select":
+                field.querySelector(
+                    `option[value=${values[key]}]`
+                ).selected = true;
+                break;
+            case "checkbox":
+            case "radio":
+                form.querySelector(
+                    `[name=${key}][value=${values[key]}]`
+                ).checked = true;
+                break;
+            default:
+                field.value = values[key];
+        }
+    });
 }
