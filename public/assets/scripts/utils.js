@@ -2,7 +2,8 @@
 import firebase from './firebase-app';
 const auth = firebase.auth();
 
-console.error("Seja bem vindo ao Console do H-Burger Red Team. Ao menos que você saiba o que tem aqui, não digite nenhum comando ou faça nenhuma ação nessa área.")
+console.log("%cSeja bem vindo ao Console do H-Burger Red Team.", "color: #FFF; text-align: center; font-family: sans-serif; font-size: 20px; font-weight: bolder; text-shadow: #000 1px 1px;");
+console.log("%cAo menos que você saiba o que tem aqui, não digite nenhum comando ou faça nenhuma ação nessa área.", "color: red; font-family: sans-serif; font-size: 20px; font-weight: bolder; text-shadow: #000 1px 1px;");
 
 //Gerenciador de menus
 export function menuHandlerAdd(menu, action = null) {
