@@ -38,7 +38,6 @@ if (order) {
         
         const renderOrder = (orders = [])=>{
 
-            console.log(orders);
 
             const ul = page.querySelector("#list-orders");
     
