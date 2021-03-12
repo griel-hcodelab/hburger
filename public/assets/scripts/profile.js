@@ -12,29 +12,48 @@ document.querySelectorAll("#app").forEach(page => {
         if (user) {
             userID = user.uid;
 
+            console.log('UserID do topo: ', userID)
+
             const db = firebase.firestore();
             const formElement = page.querySelector('form')
+
+            const nameElement = page.querySelector("#name")
+            const birthElement = page.querySelector("#birth_at")
+            const addressElement = page.querySelector("#address")
+            const districtElement = page.querySelector("#district")
+            const cityElement = page.querySelector("#city")
+            const stateElement = page.querySelector("#city")
+
             const zipcodeElement = page.querySelector("#zipcode")
             const phoneElement = page.querySelector("#phone")
             const numberElement = page.querySelector("#number")
             const documentElement = page.querySelector("#document")
             const dateElement = page.querySelector("#birth_at")
 
-            new IMask(zipcodeElement, {
-                mask: '00000-000'
-            })
+            if (zipcodeElement) {
+                new IMask(zipcodeElement, {
+                    mask: '00000-000'
+                })
+            }
+            
+            if (phoneElement) {
+                new IMask(phoneElement, {
+                    mask: '(00) 0000-0000[0]'
+                })
+            }
 
-            new IMask(phoneElement, {
-                mask: '(00) 0000-0000[0]'
-            })
+            if (documentElement) {
+                new IMask(documentElement, {
+                    mask: '000.000.000-00'
+                })
+            }
 
-            new IMask(documentElement, {
-                mask: '000.000.000-00'
-            })
-
-            new IMask(dateElement, {
-                mask: '00/00/0000'
-            })
+            if (dateElement) {
+                new IMask(dateElement, {
+                    mask: '00/00/0000'
+                })
+            }
+            
 
             const searchZipcode = () => {
 
@@ -58,22 +77,25 @@ document.querySelectorAll("#app").forEach(page => {
                 })
             }
 
-            const perfil = db.collection(`perfil`).doc(userID);
+
+            
 
             if (formElement) {
                 formElement.addEventListener('submit', e => {
-                    
+                    e.preventDefault();
+                    const perfil = db.collection(`perfil`).doc(userID);
+                    console.log(userID, perfil)
                     perfil.set({
-                        "name": document.querySelector("[name='name']").value,
-                        "birth_at": document.querySelector("[name='birth_at']").value,
-                        "document": document.querySelector("[name='document']").value,
-                        "zipcode": document.querySelector("[name='zipcode']").value,
-                        "address": document.querySelector("[name='address']").value,
-                        "number": document.querySelector("[name='number']").value,
-                        "phone": document.querySelector("[name='phone']").value,
-                        "district": document.querySelector("[name='district']").value,
-                        "city": document.querySelector("[name='city']").value,
-                        "state": document.querySelector("[name='state']").value
+                        "name": nameElement.value,
+                        "birth_at": birthElement.value,
+                        "document": documentElement.value,
+                        "zipcode": zipcodeElement.value,
+                        "address": addressElement.value,
+                        "number": numberElement.value,
+                        "phone": phoneElement.value,
+                        "district": districtElement.value,
+                        "city": cityElement.value,
+                        "state": stateElement.value
                     })
                     .then(() => {
                         showAlert("Sucesso: Cadastro Efetuado com sucesso", "success");
@@ -85,32 +107,64 @@ document.querySelectorAll("#app").forEach(page => {
             } 
 
 
+            if (zipcodeElement) {
+                zipcodeElement.addEventListener('keyup', e => {
 
-            zipcodeElement.addEventListener('keyup', e => {
-
-                if (e.key === "Enter") {
-                    searchZipcode()
-                } else if(e.target.value.length > 8) {
-                    searchZipcode()
-                }
-
-            })
+                    if (e.key === "Enter") {
+                        searchZipcode()
+                    } else if(e.target.value.length > 8) {
+                        searchZipcode()
+                    }
+    
+                })
+            }
+            
 
 
             db.collection(`perfil`).doc(userID).get(
 
             ).then((doc) => {
-                if(doc) {
-                    document.querySelector("[name='name']").value = doc.data().name
-                    document.querySelector("[name='birth_at']").value = doc.data().birth_at
-                    document.querySelector("[name='document']").value = doc.data().document
-                    document.querySelector("[name='zipcode']").value = doc.data().zipcode
-                    document.querySelector("[name='address']").value = doc.data().address
-                    document.querySelector("[name='district']").value = doc.data().district
-                    document.querySelector("[name='city']").value = doc.data().city
-                    document.querySelector("[name='state']").value = doc.data().state
-                    document.querySelector("[name='number']").value = doc.data().number 
-                    document.querySelector("[name='phone']").value = doc.data().phone 
+                if(doc.data()) {
+                    if (nameElement) {
+                        nameElement.value = doc.data().name
+                    }
+                    
+                    if (birthElement) {
+                        birthElement.value = doc.data().birth_at
+                    }
+                    
+                    if (documentElement) {
+                        documentElement.value = doc.data().document
+                    }
+                    
+                    if (zipcodeElement) {
+                        zipcodeElement.value = doc.data().zipcode
+                    }
+                    
+                    if (addressElement) {
+                        addressElement.value = doc.data().address
+                    }
+                    
+                    if (districtElement) {
+                        districtElement.value = doc.data().district
+                    }
+                    
+                    if (cityElement) {
+                        cityElement.value = doc.data().city
+                    }
+                    
+                    if (stateElement) {
+                        stateElement.value = doc.data().state
+                    }
+                    
+                    if (numberElement) {
+                        numberElement.value = doc.data().number
+                    }
+                    
+                    if (phoneElement)  {
+                        phoneElement.value = doc.data().phone 
+                    }
+                    
                 }  
             })
 
