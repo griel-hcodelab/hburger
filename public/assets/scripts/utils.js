@@ -128,3 +128,25 @@ export function onSnapshotError(err) {
     window.location.href = `/auth.html?url=${pathname}${search}`;
 
 }
+
+export function setFormValues(form, values) {
+    Object.keys(values).forEach((key) => {
+        const field = form.querySelector(`[name=${key}]`);
+
+        switch (field.type) {
+            case "select":
+                field.querySelector(
+                    `option[value=${values[key]}]`
+                ).selected = true;
+                break;
+            case "checkbox":
+            case "radio":
+                form.querySelector(
+                    `[name=${key}][value=${values[key]}]`
+                ).checked = true;
+                break;
+            default:
+                field.value = values[key];
+        }
+    });
+}
