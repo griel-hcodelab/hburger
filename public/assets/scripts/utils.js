@@ -2,6 +2,8 @@
 import firebase from './firebase-app';
 const auth = firebase.auth();
 
+console.error("Seja bem vindo ao Console do H-Burger Red Team. Ao menos que você saiba o que tem aqui, não digite nenhum comando ou faça nenhuma ação nessa área.")
+
 //Gerenciador de menus
 export function menuHandlerAdd(menu, action = null) {
     document.querySelector(menu).classList.add(action);

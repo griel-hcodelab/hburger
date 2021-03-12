@@ -12,8 +12,6 @@ document.querySelectorAll("#app").forEach(page => {
         if (user) {
             userID = user.uid;
 
-            console.log('UserID do topo: ', userID)
-
             const db = firebase.firestore();
             const formElement = page.querySelector('form')
 
@@ -84,7 +82,6 @@ document.querySelectorAll("#app").forEach(page => {
                 formElement.addEventListener('submit', e => {
                     e.preventDefault();
                     const perfil = db.collection(`perfil`).doc(userID);
-                    console.log(userID, perfil)
                     perfil.set({
                         "name": nameElement.value,
                         "birth_at": birthElement.value,
