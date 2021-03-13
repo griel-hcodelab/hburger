@@ -1,5 +1,6 @@
 import Cropper from "cropperjs"
 import firebase from './firebase-app'
+import { showAlert } from "./utils"
 
 document.querySelectorAll('.change-photo').forEach(page => {
 
@@ -77,6 +78,10 @@ document.querySelectorAll('.change-photo').forEach(page => {
           userGlobal.photoURL
           console.log("Foto atualizada")
           toast.classList.add('open')
+          showAlert('Sua foto foi atualizada com sucesso', 'success');
+          setTimeout(()=>{
+            window.location.href = 'index.html'
+          }, 7000);
         })
 
       cropper.destroy()
