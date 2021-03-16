@@ -163,8 +163,6 @@ document.querySelectorAll("#app").forEach(page => {
                             break;
                     }
 
-                    console.log(estado)
-
                     setFormValues(formElement, {
                         address: logradouro,
                         district: bairro,

@@ -11,6 +11,7 @@ document.querySelectorAll("#app").forEach((page)=>{
             const creditCardNumber = page.querySelector("[name=number]");
             const creditCardValidate = page.querySelector("[name=validate]");
             const creditCardCVV = page.querySelector("[name=code]");
+            const creditCardName = page.querySelector("[name=name]");
 
             const inputs = page.querySelectorAll("input");
             const installments = page.querySelector("[name=installments]")
@@ -44,7 +45,7 @@ document.querySelectorAll("#app").forEach((page)=>{
 
             if (installments) {
                 installments.innerHTML = '';
-                for (let i = 1; i <= 12; i++) {
+                for (let i = 1; i <= 6; i++) {
                     const option = document.createElement("option");
                     let result = eval(value / i);
                     option.innerHTML = `${i}x sem juros de ${result.toLocaleString('pt-br',{
@@ -59,6 +60,28 @@ document.querySelectorAll("#app").forEach((page)=>{
                 saveOrderBtn.addEventListener("click", (e)=>{
                     e.preventDefault();
                     let status;
+
+                    if (creditCardNumber.value.length < 19) {
+                        showAlert("O número do cartão de crédito está incorreto.", "error");
+                        creditCardNumber.focus();
+                        status = false;
+                    } else if (creditCardValidate.value.length < 5) {
+                        showAlert("A validade do cartão de crédito está incorreta.", "error");
+                        creditCardValidate.focus();
+                        status = false;
+                    } else if (creditCardCVV.value.length < 3) {
+                        showAlert("O código de segurança do cartão está incorreto.", "error");
+                        creditCardCVV.focus();
+                        status = false;
+                    } else if (creditCardName.value == '') {
+                        showAlert("Você precisa digitar seu nome.", "error");
+                        creditCardName.focus();
+                        status = false;
+                    } else {
+                        status = true;
+                        hideAlert("error");
+                    }
+
                     inputs.forEach((input)=>{
                         if (checkInput(input) === false) {
                             showAlert("Verifique se todos os campos estão preenchidos.", "error")
@@ -68,9 +91,13 @@ document.querySelectorAll("#app").forEach((page)=>{
                             status = true;
                         }
                     });
+
+   
+                    
                     if (status) {
                         saveOrderBtn.disabled = true;
                         saveOrderBtn.innerHTML = "Aguarde..."
+                        paymentProcess('Por favor, aguarde...');
                         saveOrder(quantity, value);
                     }
                 });
@@ -83,13 +110,23 @@ document.querySelectorAll("#app").forEach((page)=>{
     
 });
 
+const paymentProcess = (message)=>{
+    document.querySelector("main section").innerHTML = `
+    <div class="paymentProcess">
+    <img src='../assets/images/loading.svg' />
+    <p>${message}</p>
+    </div>
+    `;
+}
+
     
 const saveOrder = (q, v)=>{
 
     auth.onAuthStateChanged(user => {
         if (user) {
 
-            
+            paymentProcess("Processando seu pagamento...");
+
             const data = new Date();
             const year = data.getFullYear().toString();
             const month = data.getMonth().toString();
@@ -110,13 +147,13 @@ const saveOrder = (q, v)=>{
         
             })
             .then(() => {
-                showAlert("Sucesso: Seu hambúrger foi registrado! Você será direcionado aos seus pedidos.", "success");
+                paymentProcess("Pagamento aprovado! Você será direcionado ao seus pedidos.");
                 setTimeout(()=>{
                     window.location.href = "orders.html";
                 }, 2000)
             })
             .catch((error) => {
-                console.error("Error writing document: ", error);
+
             });
 
             

@@ -76,7 +76,6 @@ document.querySelectorAll('.change-photo').forEach(page => {
         .then(() => {
           document.querySelector("header > img#avatar").src = userGlobal.photoURL
           userGlobal.photoURL
-          console.log("Foto atualizada")
           toast.classList.add('open')
           showAlert('Sua foto foi atualizada com sucesso', 'success');
           setTimeout(()=>{
