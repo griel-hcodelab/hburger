@@ -351,6 +351,7 @@ body, div, section, main, article, header, footer, form, label {
 #app > section main .category ul label h3, #app > section main .category ul label div {
   padding: 10px 0;
   border-bottom: var(--secondary) 1px dotted;
+  height: 60px;
 }
 #app > section main .category ul label h3 {
   flex: 1;
@@ -893,7 +894,7 @@ body, div, section, main, article, header, footer, form, label {
   }
 }
 
-#app section main form div#alert.error {
+#app section main section form div#alert.error {
   color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;
@@ -902,7 +903,7 @@ body, div, section, main, article, header, footer, form, label {
   margin: var(--space) 0;
   display: none;
 }
-#app section main form div#alert.success {
+#app section main section form div#alert.success {
   color: #155724;
   background-color: #d4edda;
   border-color: #c3e6cb;
@@ -910,6 +911,14 @@ body, div, section, main, article, header, footer, form, label {
   border-radius: var(--space);
   margin: var(--space) 0;
   display: none;
+}
+#app section main section div.paymentProcess {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #000;
+  font-size: 30px;
 }
 #app section footer button:disabled {
   opacity: 0.5;
@@ -1141,6 +1150,29 @@ form button:hover {
   color: var(--dark);
   border-color: var(--primary);
   background-color: var(--primary);
+}
+
+#app.orders main div#alert.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: var(--space);
+  border-radius: var(--space);
+  margin: var(--space) 0;
+  display: none;
+}
+#app.orders main div#alert.success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  padding: var(--space);
+  border-radius: var(--space);
+  margin: var(--space) 0;
+  display: none;
+}
+
+#app section main section div.hide {
+  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */

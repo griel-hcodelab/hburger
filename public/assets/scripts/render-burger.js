@@ -3,9 +3,9 @@ import { appendTemplate, formatPrice } from './utils';
 const db = firebase.firestore();
 const auth = firebase.auth();
 
-let labels = [];
+let labels;
 let removeBtns = [];
-let userID;
+var userID;
 
 const index = document.querySelectorAll(".carte")
 if (index) {
@@ -15,13 +15,48 @@ if (index) {
         auth.onAuthStateChanged(user => {
             if (user) {
                 userID = user.uid;
-                renderTray()
+                db.collection(`pedidos/${userID}/bandeja`).onSnapshot(snapshot => {
+                    const tray = [];
+                    snapshot.forEach(item => {
+                      tray.push(item.data());
+                    })
+                    renderTray(tray)
+                    //renderAditionals(aditionals);
+                });
+
+
             }
         })
 
         //Variáveis da página
         const footer = page.querySelector("footer");
         const saveBurger = page.querySelector("#saveBurger");
+
+        window.addEventListener("load", ()=>{
+            updateHash();
+        });
+        window.addEventListener("hashchange", ()=>{
+            updateHash();
+        });
+
+        const updateHash = ()=>{
+
+            const steps = page.querySelectorAll(".category");
+            steps.forEach((item)=>{
+                item.classList.add("hide");
+            })
+            switch(window.location.hash) {
+                case '#bread':
+                    page.querySelector("#bread").classList.remove("hide")
+                break
+                case '#aditionals':
+                    page.querySelector("#aditionals").classList.remove("hide")
+                break
+                default:
+                    page.querySelector("#burger").classList.remove("hide")  
+                break;
+            }
+        }
         
 
         //Renderizando Lanches
@@ -33,7 +68,7 @@ if (index) {
                     <label data-id="${item.id}" data-burgername="${item.name}" data-name="${item.name}" data-price="${item.price}">
                         <input type="radio" name="burger" id="burger-${item.id}" />
                         <span></span>
-                        <h3>${item.name}</h3>
+                        <h3>${item.name} <span>(${item.detail})</span></h3>
                         <div>${formatPrice(item.price)}</div>
                     </label>
                 `);
@@ -47,9 +82,9 @@ if (index) {
             bread.forEach((item)=>{
                 appendTemplate(ul, "li", `
                     <label data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                        <input type="radio" name="bread" id="bread-${item.id}" />
+                        <input type="radio" name="bread" ${item.checked} id="bread-${item.id}" />
                         <span></span>
-                        <h3>${item.name}</h3>
+                        <h3>${item.name} <span>(${item.detail})</span></h3>
                         <div>${formatPrice(item.price)}</div>
                     </label>
                 `);
@@ -63,39 +98,34 @@ if (index) {
             aditionals.forEach((item)=>{
                 appendTemplate(ul, "li", `
                     <label data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                        <input type="checkbox" name="item" id="aditional-${item.id}" />
+                        <input type="checkbox" ${item.checked} name="item" id="aditional-${item.id}" />
                         <span></span>
                         <h3>${item.name}</h3>
                         <div>${formatPrice(item.price)}</div>
                     </label>
                 `);
             });
-            updateFields();
+            updateChecks();
+            
         }
 
         //Renderizando Bandeja
-        const renderTray = (items = null)=>{
+        const renderTray = (tray)=>{
             const ul = page.querySelector("aside section ul");
             ul.innerHTML = '';
-            db.collection(`pedidos/${userID}/bandeja`).onSnapshot(snapshot => {
-                snapshot.forEach((item)=>{
-                    appendTemplate(ul, "li", `
-                    <div>${item.data().burgerName}</div>
-                    <div>${formatPrice(parseFloat(item.data().prices))}</div>
-                    <button type="button" id="${item.data().trayID}" aria-label="Remover Hamburguer">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z" fill="black"/>
-                        </svg>
-                    </button>
-                    `);
-                    renderTrayValues();
-                })
-             });
-             updateFields();
-        }
 
-        //Renderizando valores da bandeja
-        const renderTrayValues = ()=>{
+            tray.forEach((item)=>{
+                appendTemplate(ul, "li", `
+                <div>${item.burgerName}</div>
+                <div>${formatPrice(parseFloat(item.prices))}</div>
+                <button type="button" id="${item.trayID}" aria-label="Remover Hamburguer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z" fill="black"/>
+                    </svg>
+                </button>
+                `);
+            })
+
             let items = page.querySelectorAll("aside section ul li").length;
             if (items === 1) {
                 page.querySelector("#app > aside > header > strong > small").innerHTML = `${items} H-Burger`
@@ -104,23 +134,32 @@ if (index) {
             }
 
             let values = [];
+            let totalValue;
+
             let valuesHtml = page.querySelectorAll("aside > section > ul > li > div:nth-child(2)");
             valuesHtml.forEach((item)=>{
                 values.push(parseFloat(item.innerHTML.replace("R$&nbsp;","").replace(",",".")));
             });
-            let totalValue = values.reduce((total, item)=>{
-                return eval(total+item)
-            })
 
+            if (values.length === 0) {
+                totalValue = 0;
+            } else {
+                totalValue = values.reduce((total, item)=>{
+                    return eval(total+item)
+                })
+            }
+            
             page.querySelector("aside > footer > div.price").innerHTML = `
                 <small>Subtotal </small> <span>${formatPrice(totalValue)}</span>
             `;
+
             removeBtns = page.querySelectorAll("[aria-label='Remover Hamburguer']");
             removeBtns.forEach((item)=>{
                 item.addEventListener("click", (e)=>{
                     deleteTray(item.id);
                 });
             });
+            
         }
    
         //Buscando do Banco de Dados
@@ -145,17 +184,23 @@ if (index) {
             })
             renderAditionals(aditionals);
         });
-        
-        //Atualizando Campos
-        const updateFields = ()=>{
-            labels.push(page.querySelectorAll(".category li"));
-            activateClicks();
-        }
 
         //Salvando Hamburger
         saveBurger.addEventListener("click", (e)=>{
             e.preventDefault();
-            saveBurgerFn();
+            switch (window.location.hash) {
+                default:
+                    saveBurger.innerHTML = "Escolha seu lanche"
+                    window.location.hash = '#bread';
+                break;
+                case "#bread":
+                    window.location.hash = '#aditionals';
+                break;
+                case "#aditionals":
+                    saveBurgerFn();
+                break;
+            }
+            
         })
         const saveBurgerFn = ()=>{
             const selected = page.querySelectorAll("input:checked");
@@ -185,8 +230,7 @@ if (index) {
                 "trayID":trayNumber
             })
             .then(() => {
-                renderTray()
-                window.location.reload();
+                //renderTray()
             })
             .catch((error) => {
                 console.error("Error writing document: ", error);
@@ -199,28 +243,12 @@ if (index) {
 
             db.collection(`pedidos/${userID}/bandeja`).doc(trayID).delete()
             .then(() => {
-                document.querySelector("aside section ul").innerHTML = "Apagando seu HBurger..."
-                window.location.reload();
+                //document.querySelector("aside section ul").innerHTML = "Apagando seu HBurger..."
+                //window.location.reload();
             }).catch((error) => {
                 console.error("Error removing document: ", error);
             });
         }
-
-        //Atualizando os campos para ouvir o clique
-        const activateClicks = ()=>{
-            if (labels[1]) {
-                labels[1].forEach((item)=>{
-                    item.addEventListener("click", (e)=>{
-                        document.querySelector("footer").classList.add("show")
-                        if (page.querySelectorAll("input:checked").length >= 2) {
-                            saveBurger.disabled = false;
-                        }
-                    });
-                });
-            }
-           
-        }
-
 
         //Salvando a bandeja e levando pro pagamento
         const payBtn = page.querySelector("[aria-label='Pagar']");
@@ -249,6 +277,31 @@ if (index) {
             },2000);
 
         }
+
+        //Atualizando os campos para ouvir o clique
+        const updateChecks = ()=>{
+            labels = page.querySelectorAll(".category ul li label input");
+
+            for (let i = 0; i < labels.length; i++) {
+                const element = labels[i];
+                element.addEventListener("click", ()=>{
+                    switch (window.location.hash) {
+                        default:
+                            window.location.hash = '#bread';
+                        break;
+                        case "#bread":
+                            window.location.hash = '#aditionals';
+                        break;
+                        case "#aditionals":
+                            saveBurger.disabled = false;
+                        break;
+                    }
+                })
+            }
+        }
+
+
+
     });
 
 
@@ -257,4 +310,31 @@ if (index) {
 
 }
 
+        
 
+/*const updateChecks = ()=>{
+    const inputs = document.querySelectorAll(".category ul li label");
+
+    inputs.forEach((item)=>{
+        item.addEventListener("click", ()=>{
+            console.log(item)
+        })
+    })
+
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener("click", ()=>{
+            switch (window.location.hash) {
+                default:
+                    window.location.hash = '#bread';
+                break;
+                case "#bread":
+                    window.location.hash = '#aditionals';
+                    //está clicando 4x
+                break;
+            }
+            console.log('a', inputs[i])
+        });
+    }
+
+
+};*/
