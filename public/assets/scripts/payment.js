@@ -148,6 +148,8 @@ const saveOrder = (q, v)=>{
             })
             .then(() => {
                 paymentProcess("Pagamento aprovado! Você será direcionado ao seus pedidos.");
+                sessionStorage.clear('items');
+                sessionStorage.clear('price');
                 setTimeout(()=>{
                     window.location.href = "orders.html";
                 }, 2000)

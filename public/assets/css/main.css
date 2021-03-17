@@ -383,11 +383,12 @@ body, div, section, main, article, header, footer, form, label {
   font-weight: 300;
   cursor: pointer;
   transition: none;
+  border-bottom: var(--secondary) 1px dotted;
+  padding-bottom: 15px;
+  padding-top: 15px;
 }
 #app > section main .category ul label h3, #app > section main .category ul label div {
   padding: 10px 0;
-  border-bottom: var(--secondary) 1px dotted;
-  height: 60px;
 }
 #app > section main .category ul label h3 {
   flex: 1;

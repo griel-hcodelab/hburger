@@ -3,7 +3,9 @@ import { appendTemplate, formatPrice } from './utils';
 const db = firebase.firestore();
 const auth = firebase.auth();
 
-
+let labels;
+let removeBtns = [];
+var userID;
 
 const index = document.querySelectorAll(".carte")
 if (index) {
@@ -12,11 +14,8 @@ if (index) {
         //Variáveis da página
         const footer = page.querySelector("footer");
         const saveBurger = page.querySelector("#saveBurger");
-        let values = [];
-        let totalValue;
-        let labels;
-        let removeBtns = [];
-        var userID;
+        const subTotalArea = footer.querySelector("h2");
+
 
         //Pegando o ID do usuário logado
         auth.onAuthStateChanged(user => {
@@ -34,6 +33,8 @@ if (index) {
             }
         })
 
+
+
         window.addEventListener("load", ()=>{
             updateHash();
         });
@@ -50,15 +51,19 @@ if (index) {
             switch(window.location.hash) {
                 case '#bread':
                     page.querySelector("#bread").classList.remove("hide");
-                    saveBurger.innerHTML = 'Turbinar o seu Lanche ►'
+                    saveBurger.innerHTML = 'Turbinar o seu Lanche ►';
                 break
                 case '#aditionals':
                     page.querySelector("#aditionals").classList.remove("hide")
-                    saveBurger.innerHTML = 'Colocar na Bandeja √'
+                    saveBurger.innerHTML = 'Colocar na Bandeja √';
                 break
                 default:
-                    page.querySelector("#burger").classList.remove("hide")  
-                    saveBurger.innerHTML = 'Esperando você marcar o lanche'
+                    page.querySelector("#burger").classList.remove("hide");
+                    if (document.querySelectorAll("#burger input:checked").length === 0) {
+                        saveBurger.innerHTML = 'Esperando você marcar o lanche';
+                    } else {
+                        saveBurger.innerHTML = 'Escolher o Pão ►';
+                    }
                 break;
             }
         }
@@ -103,7 +108,7 @@ if (index) {
             aditionals.forEach((item)=>{
                 appendTemplate(ul, "li", `
                     <label data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                        <input type="checkbox" ${item.checked} name="item" id="aditional-${item.id}" />
+                        <input type="checkbox" name="item" id="aditional-${item.id}" />
                         <span></span>
                         <h3>${item.name}</h3>
                         <div>${formatPrice(item.price)}</div>
@@ -138,7 +143,8 @@ if (index) {
                 page.querySelector("#app > aside > header > strong > small").innerHTML = `${items} H-Burgers`
             }
 
-
+            let values = [];
+            let totalValue;
 
             let valuesHtml = page.querySelectorAll("aside > section > ul > li > div:nth-child(2)");
             valuesHtml.forEach((item)=>{
@@ -209,8 +215,8 @@ if (index) {
                         input.checked = false;
                     })
                     page.querySelector("#bread input").checked = true;
-                    page.querySelector("#aditionals input").checked = true;
                     saveBurger.disabled = true;
+                    footer.classList.remove("show");
                     window.location.hash = '';
                 break;
             }
@@ -244,7 +250,7 @@ if (index) {
                 "trayID":trayNumber
             })
             .then(() => {
-                //renderTray()
+                subTotalArea.innerHTML = "R$ 0,00";
             })
             .catch((error) => {
                 console.error("Error writing document: ", error);
@@ -302,47 +308,29 @@ if (index) {
                         saveBurger.innerHTML = 'Escolher o Pão ►';
                     } 
                     
-                    updateSubTotal();
+                    let inputCheckeds = page.querySelectorAll(".category input:checked");
+                    updateSubTotal(inputCheckeds);
                 })
+                
             }
             
         }
         
         //Atualizando o subtotal
-        const updateSubTotal = (inputs)=>{
-            let subtotalValues = [];
-            let inputsChecked = page.querySelectorAll(".category input:checked");
-            inputsChecked.forEach((price)=>{
-                subtotalValues.push(
-                    parseInt(
+        const updateSubTotal = (input)=>{
+            let subtotalValue = [];
+            input.forEach((price)=>{
+                subtotalValue.push(
+                    parseFloat(
                         price.parentElement.querySelector("div")
                         .innerText.replace("R$","").replace(",",".")
                         )
                     );
-                console.log(subtotalValues)
             })
+            subTotalArea.innerHTML = formatPrice(subtotalValue.reduce((item, total)=>{
+                return eval(item+total)
+            }))
+            
         }
-
-
-
-        /*page.querySelectorAll("input").forEach((input)=>{
-            input.addEventListener("change", ()=>{
-                
-
-                    page.querySelectorAll(".category input:checked").forEach((price)=>{
-                        subtotalValues.push(
-                            parseInt(
-                                price.parentElement.querySelector("div")
-                                .innerText.replace("R$","").replace(",",".")
-                                )
-                            );
-                        console.log(subtotalPrice)
-                    })
-            })
-        })*/
-
-
-
     });
-
 }
