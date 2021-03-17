@@ -44,6 +44,26 @@
                 right: var(--space);
                 @include components.avatar;
             }
+            .profile-menu {
+                position: absolute;
+                right: 20px;
+                top: 90px;
+                border: 1px solid #FFF;
+                padding: 20px;
+                background-color: #dd0e0e4f;
+                backdrop-filter: blur(5px);
+                border-radius: 5px;
+                opacity: 0;
+                a {
+                    color: #FFF;
+                    text-decoration: none;
+                    margin: 10px 0;
+                }
+                &.show {
+                    opacity: 1;
+                }
+
+            }
         }
         main {
             padding-bottom: 64px;
@@ -78,6 +98,27 @@
             .category {
                 @include components.category-list;
                 margin: var(--space);
+                .btnBack {
+                    display: flex;
+                    text-decoration: none;
+                    background-color: red;
+                    //border: 1px solid rgba(#FF5252, .7);
+                    border-radius: var(--radius);
+                    height: 40px;
+                    width: 200px;
+                    margin-top: 15px;
+                    justify-content: center;
+                    align-items: center;
+                    span {
+                        text-transform: uppercase;
+                        color: white;
+                        font-size: 16px;
+                        background-color: red;
+                    }
+                    &:hover {
+                        box-shadow: 0 0 10px var(--primary);
+                    }
+                }
                 ul {
                     margin-top: var(--space);
                     color: rgba(colors.$secondary, .7);
@@ -92,6 +133,7 @@
                         h3, div {
                             padding: 10px 0;
                             border-bottom: var(--secondary) 1px dotted;
+                            height: 60px;
                         }
                         h3 {
                             flex: 1;
@@ -145,9 +187,15 @@
             width: 100%;
             background-color: colors.$bgHorizontalLine;
             height: 64px;
+            flex-direction: row;
             @include mixins.flex-center;
             button {
                 @include components.button(colors.$primary);
+            }
+            h2 {
+                margin-left: 15px;
+                border-left: 1px solid;
+                padding-left: 15px;
             }
             &.show {
                 z-index: 1;

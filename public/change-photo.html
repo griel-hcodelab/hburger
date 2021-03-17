@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Projeto Hburger do Hcode Lab" />
+    <title>HBurguer</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/cropper.min.css" />
+    <link rel="shortcut icon" href="assets/images/logo-favicon-red.svg" type="image/x-icon" />
+</head>
+<body id="app" class="change-photo">
+    
+    <section>
+        
+        <header>
+            <a href="index.html">
+                <img src="assets/images/logo-icon-red.svg" alt="Logo Icone" id="logo-icon" />
+                <img src="assets/images/logo-text-red.svg" alt="Logo Texto" id="logo-text" />
+            </a>
+            <img src="https://i.pravatar.cc/50" alt="Avatar" id="avatar" />
+            <div class="profile-menu">
+                <a href="change-photo.html">Mudar Foto</a>
+                <a href="signout.html">Sair</a>
+            </div>
+        </header>
+
+        <main>
+
+            <form>
+
+                <img src="" alt="Foto Atual" id="photo-preview" />
+
+                <input type="file" name="photo" id="file">
+
+                <input type="hidden" name="x" />
+                <input type="hidden" name="y" />
+                <input type="hidden" name="width" />
+                <input type="hidden" name="height" />
+
+                <button type="button" class="choose-photo">Escolher Foto</button>
+
+                <div class="toast success">
+                    <div id="alert"></div>
+                </div>
+                
+                <footer class="fixed">
+    
+                    <button type="submit">Salvar</button>
+    
+                </footer>
+            </form>
+
+        </main>        
+
+    </section>
+
+    <script src="bundle.js"></script>
+
+</body>
+</html>

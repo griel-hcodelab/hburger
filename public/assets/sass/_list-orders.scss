@@ -14,6 +14,47 @@
         flex-direction: row;
         display: flex;
         color: var(--dark);
+        /* Roberto */
+        overflow: hidden;
+        height: 200px;
+        .confirm {
+            color: #000;
+            text-align: center;
+            z-index: 445;
+            transform: translate(0px, 0px);
+            background-color: #ff000063;
+            height: 200px;
+            width: 0px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px 0 0 10px;
+            transition: 1s;
+            position: relative;
+            left: -280px;
+            button {
+                border-radius: var(--radius);
+                border: 0;
+                background-color: #ff1b1b;
+                margin: 10px;
+                height: 35px;
+                outline: none;
+                color: #FFF;
+                font-weight: bold;
+                cursor: pointer;
+                &.confirmYes {
+                    &:hover {
+                        background-color: #fd0909;
+                    }
+                }
+                &.confirmNo {
+                    background-color: green;
+                    &:hover {
+                        background-color: #015d01;
+                    }
+                }
+            }
+        }
+        /* */
         > div {
             padding: 10px;
         }

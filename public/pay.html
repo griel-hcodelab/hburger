@@ -18,6 +18,10 @@
                 <img src="assets/images/logo-text-red.svg" alt="Logo Texto" id="logo-text" />
             </a>
             <img src="https://i.pravatar.cc/50" alt="Avatar" id="avatar" />
+            <div class="profile-menu">
+                <a href="change-photo.html">Mudar Foto</a>
+                <a href="signout.html">Sair</a>
+            </div>
         </header>
 
         <main>
@@ -27,8 +31,11 @@
             <section>
                 
                 <form>
+                    <div id="alert">
 
-                    <input type="text" name="number" placeholder="Número do Cartão" />
+                    </div>
+
+                    <input type="text" name="number" placeholder="Número do Cartão" minlength="19" />
 
                     <div class="fields">
                         <div class="field">

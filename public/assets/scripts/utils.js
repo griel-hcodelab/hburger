@@ -2,12 +2,20 @@
 import firebase from './firebase-app';
 const auth = firebase.auth();
 
+console.log("%cSeja bem vindo ao Console do H-Burger Red Team.", "color: #FFF; text-align: center; font-family: sans-serif; font-size: 20px; font-weight: bolder; text-shadow: #000 1px 1px;");
+console.log("%cAo menos que você saiba o que tem aqui, não digite nenhum comando ou faça nenhuma ação nessa área.", "color: red; font-family: sans-serif; font-size: 20px; font-weight: bolder; text-shadow: #000 1px 1px;");
+
 //Gerenciador de menus
-export function menuHandler(menu, action = null) {
-    document.querySelector(menu).classList.toggle(action);
+export function menuHandlerAdd(menu, action = null) {
+    document.querySelector(menu).classList.add(action);
 }
 
-//Gerenciamento de alertas
+export function menuHandlerRemove(menu, action = null) {
+    document.querySelector(menu).classList.remove(action);
+}
+
+
+//Gerenciamento de alertas, onde type é: 'success' para sucesso e 'error' para erro
 export function showAlert(message, type) {
     document.querySelector("#alert").style.display = "flex";
     document.querySelector("#alert").classList.add(type);
@@ -72,19 +80,30 @@ if (menu) {
     const auth = firebase.auth();
     auth.onAuthStateChanged(user => {
         if (user) {
-            console.log("Está logado");
+            if (user.photoURL) {
+                document.querySelector("header > img#avatar").src = user.photoURL;
+            }
             menu.addEventListener("click", (e)=>{
-                auth.signOut();
-                window.location.href = "index.html";
+                //auth.signOut();
+                //window.location.href = "index.html";
+                document.querySelector(".profile-menu").classList.toggle("show");
             })
         } else {
-            console.log("Não está logado");
             menu.addEventListener("click", (e)=>{
                 window.location.href = "login.html";
             })
         }
     });
 }
+//Signout
+const signout = document.querySelector(".signout");
+if (signout) {
+    const auth = firebase.auth();
+    auth.signOut();
+    //window.location.href = "index.html";
+}//
+
+
 export function appendTemplate(element, tagName, html) {
     const wrapElement = document.createElement(tagName)
   
@@ -111,4 +130,26 @@ export function onSnapshotError(err) {
 
     window.location.href = `/auth.html?url=${pathname}${search}`;
 
+}
+
+export function setFormValues(form, values) {
+    Object.keys(values).forEach((key) => {
+        const field = form.querySelector(`[name=${key}]`);
+
+        switch (field.type) {
+            case "select":
+                field.querySelector(
+                    `option[value=${values[key]}]`
+                ).selected = true;
+                break;
+            case "checkbox":
+            case "radio":
+                form.querySelector(
+                    `[name=${key}][value=${values[key]}]`
+                ).checked = true;
+                break;
+            default:
+                field.value = values[key];
+        }
+    });
 }
