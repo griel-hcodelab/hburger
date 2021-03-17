@@ -150,9 +150,15 @@
             width: 100%;
             background-color: colors.$bgHorizontalLine;
             height: 64px;
+            flex-direction: row;
             @include mixins.flex-center;
             button {
                 @include components.button(colors.$primary);
+            }
+            h2 {
+                margin-left: 15px;
+                border-left: 1px solid;
+                padding-left: 15px;
             }
             &.show {
                 z-index: 1;

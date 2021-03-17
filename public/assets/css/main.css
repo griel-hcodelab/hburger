@@ -399,6 +399,7 @@ body, div, section, main, article, header, footer, form, label {
   width: 100%;
   background-color: #1F2525;
   height: 64px;
+  flex-direction: row;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -424,6 +425,11 @@ body, div, section, main, article, header, footer, form, label {
   color: var(--dark);
   transition-duration: 0.05s;
   box-shadow: 0 0 5px var(--primary);
+}
+#app > section > footer h2 {
+  margin-left: 15px;
+  border-left: 1px solid;
+  padding-left: 15px;
 }
 #app > section > footer.show {
   z-index: 1;
