@@ -3,10 +3,13 @@ import IMask from 'imask'
 import { setFormValues, showAlert, getFormValues } from './utils'
 import firebase from './firebase-app';
 
-document.querySelectorAll("#app").forEach(page => {
+document.querySelectorAll("#app.profile").forEach(page => {
 
     const auth = firebase.auth();
     let userID; 
+
+    //Adicionando scroll
+    document.querySelector("body").style.overflowY = 'scroll';
 
     auth.onAuthStateChanged(user => {
         if (user) {

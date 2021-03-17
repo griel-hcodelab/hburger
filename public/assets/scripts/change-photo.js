@@ -2,7 +2,7 @@ import Cropper from "cropperjs"
 import firebase from './firebase-app'
 import { showAlert } from "./utils"
 
-document.querySelectorAll('.change-photo').forEach(page => {
+document.querySelectorAll('#app.change-photo').forEach(page => {
 
   let cropper = null
   let userGlobal = null
@@ -13,6 +13,9 @@ document.querySelectorAll('.change-photo').forEach(page => {
   const btnSubmit = form.querySelector("[type=submit]")
   const bodyElement =  document.body;
   const toast = form.querySelector('#app > section > main > form > div')
+
+  //Adicionando scroll
+  document.querySelector("body").style.overflowY = 'scroll';
 
   const auth = firebase.auth()
 
