@@ -335,6 +335,26 @@ body, div, section, main, article, header, footer, form, label {
   padding: 0;
   list-style: none;
 }
+#app > section main .category .btnBack {
+  display: flex;
+  text-decoration: none;
+  background-color: red;
+  border-radius: var(--radius);
+  height: 40px;
+  width: 200px;
+  margin-top: 15px;
+  justify-content: center;
+  align-items: center;
+}
+#app > section main .category .btnBack span {
+  text-transform: uppercase;
+  color: white;
+  font-size: 16px;
+  background-color: red;
+}
+#app > section main .category .btnBack:hover {
+  box-shadow: 0 0 10px var(--primary);
+}
 #app > section main .category ul {
   margin-top: var(--space);
   color: rgba(255, 82, 82, 0.7);
