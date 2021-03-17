@@ -1,5 +1,5 @@
 import firebase from './firebase-app'
-import { appendTemplate, formatPrice } from './utils';
+import { appendTemplate, formatPrice, hideAlert, showAlert } from './utils';
 const db = firebase.firestore();
 const auth = firebase.auth();
 
@@ -218,6 +218,7 @@ if (index) {
                     saveBurger.disabled = true;
                     footer.classList.remove("show");
                     window.location.hash = '';
+                    hideAlert('error');
                 break;
             }
             
@@ -270,9 +271,19 @@ if (index) {
         //Salvando a bandeja e levando pro pagamento
         const payBtn = page.querySelector("[aria-label='Pagar']");
         payBtn.addEventListener("click", (e)=>{
-            sessionStorage.setItem("items", parseInt(page.querySelector("aside > header > strong > small").innerHTML));
-            sessionStorage.setItem("price", document.querySelector("aside > footer > div.price > span").innerHTML.replace("R$&nbsp;","").replace(",","."))
-            goToPay();
+
+
+            let items = parseInt(page.querySelector("aside > header > strong > small").innerHTML)
+            console.log(items)
+            if (items === 0) {
+                showAlert("Você não pode ir para o pagament se não tiver comprado nada!","error");
+            } else {
+                hideAlert('error');
+                sessionStorage.setItem("items", parseInt(page.querySelector("aside > header > strong > small").innerHTML));
+                sessionStorage.setItem("price", document.querySelector("aside > footer > div.price > span").innerHTML.replace("R$&nbsp;","").replace(",","."))
+                goToPay();
+            }
+
         });
         const goToPay = ()=>{
 

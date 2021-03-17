@@ -258,6 +258,18 @@
         background-color: var(--white);
         color: var(--dark);
         height: 64px;
+        div {
+            &#alert {
+                &.error {
+                    @include components.error;
+                    display: none;
+                }
+                &.success {
+                    @include components.success;
+                    display: none;    
+                }
+            }
+        }
         header {
             flex-direction: row;
             justify-content: space-between;
