@@ -47,13 +47,16 @@ if (index) {
             })
             switch(window.location.hash) {
                 case '#bread':
-                    page.querySelector("#bread").classList.remove("hide")
+                    page.querySelector("#bread").classList.remove("hide");
+                    saveBurger.innerHTML = 'Turbinar o seu Lanche ►'
                 break
                 case '#aditionals':
                     page.querySelector("#aditionals").classList.remove("hide")
+                    saveBurger.innerHTML = 'Colocar na Bandeja √'
                 break
                 default:
                     page.querySelector("#burger").classList.remove("hide")  
+                    saveBurger.innerHTML = 'Esperando você marcar o lanche'
                 break;
             }
         }
@@ -188,16 +191,26 @@ if (index) {
         //Salvando Hamburger
         saveBurger.addEventListener("click", (e)=>{
             e.preventDefault();
-            switch (window.location.hash) {
+            
+            switch(window.location.hash) {
                 default:
-                    saveBurger.innerHTML = "Escolha seu lanche"
-                    window.location.hash = '#bread';
+                    window.location.hash = '#bread'
                 break;
-                case "#bread":
-                    window.location.hash = '#aditionals';
+                case '#bread':
+                    window.location.hash = '#aditionals'
                 break;
-                case "#aditionals":
+                case '#aditionals':
                     saveBurgerFn();
+                    page.querySelectorAll("input[type=checkbox]:checked").forEach((input)=>{
+                        input.checked = false;
+                    })
+                    page.querySelectorAll("input[type=radio]:checked").forEach((input)=>{
+                        input.checked = false;
+                    })
+                    page.querySelector("#bread input").checked = true;
+                    page.querySelector("#aditionals input").checked = true;
+                    saveBurger.disabled = true;
+                    window.location.hash = '';
                 break;
             }
             
@@ -285,17 +298,11 @@ if (index) {
             for (let i = 0; i < labels.length; i++) {
                 const element = labels[i];
                 element.addEventListener("click", ()=>{
-                    switch (window.location.hash) {
-                        default:
-                            window.location.hash = '#bread';
-                        break;
-                        case "#bread":
-                            window.location.hash = '#aditionals';
-                        break;
-                        case "#aditionals":
-                            saveBurger.disabled = false;
-                        break;
-                    }
+                    if (document.querySelector("#burger input:checked") && (!window.location.hash)) {
+                        footer.classList.add("show");
+                        saveBurger.disabled = false;
+                        saveBurger.innerHTML = 'Escolher o Pão ►';
+                    } 
                 })
             }
         }
