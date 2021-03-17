@@ -275,7 +275,7 @@ if (index) {
 
             let items = parseInt(page.querySelector("aside > header > strong > small").innerHTML)
             if (items === 0) {
-                showAlert("Você não pode ir para o pagament se não tiver comprado nada!","error");
+                showAlert("Você não pode ir para o pagamento se não tiver comprado nada!","error");
             } else {
                 hideAlert('error');
                 sessionStorage.setItem("items", parseInt(page.querySelector("aside > header > strong > small").innerHTML));
