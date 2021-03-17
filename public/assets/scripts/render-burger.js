@@ -274,7 +274,6 @@ if (index) {
 
 
             let items = parseInt(page.querySelector("aside > header > strong > small").innerHTML)
-            console.log(items)
             if (items === 0) {
                 showAlert("Você não pode ir para o pagament se não tiver comprado nada!","error");
             } else {
