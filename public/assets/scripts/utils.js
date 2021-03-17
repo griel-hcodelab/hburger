@@ -104,8 +104,14 @@ if (signout) {
 }//
 
 
-export function appendTemplate(element, tagName, html) {
+export function appendTemplate(element, tagName, html, attr = null) {
     const wrapElement = document.createElement(tagName)
+
+    if (attr) {
+        for(let item in attr) {
+            wrapElement.setAttribute(item, attr[item])
+        }
+    }
   
     wrapElement.innerHTML = html
   
