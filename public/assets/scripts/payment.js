@@ -1,15 +1,20 @@
 import IMask from 'imask';
-import { checkInput, hideAlert, showAlert, verifyLogin } from './utils';
+import { appendTemplate, checkInput, hideAlert, showAlert, verifyLogin } from './utils';
 import firebase from './firebase-app';
 
 const db = firebase.firestore();
 const auth = firebase.auth();
 
-document.querySelectorAll("#app").forEach((page)=>{
+document.querySelectorAll("#app.payment").forEach((page)=>{
     auth.onAuthStateChanged(user => {
         if (user) {
             const creditCardNumber = page.querySelector("[name=number]");
             const creditCardValidate = page.querySelector("[name=validate]");
+
+            const validate_month = page.querySelector("#validate_month");
+            const validate_year = page.querySelector("#validate_year");
+
+
             const creditCardCVV = page.querySelector("[name=code]");
             const creditCardName = page.querySelector("[name=name]");
 
@@ -19,6 +24,34 @@ document.querySelectorAll("#app").forEach((page)=>{
 
             let quantity = sessionStorage.getItem('items');
             let value = parseFloat(sessionStorage.getItem('price'));
+
+            if (!quantity || !value ) {
+                showAlert("Alguma coisa deu errada com seu pedido. Você será direcionado à página inicial", 'error');
+                setTimeout(()=>{
+                    window.location.href = '/';
+                }, 2000);
+            }
+
+            if (validate_month) {
+                for (let i = 1; i <= 12; i++) {
+
+                    appendTemplate(validate_month, "option", `${i}`, {
+                        'value':`${i}`
+                    });
+                    
+                }
+            }
+
+            if (validate_year) {
+                const year = new Date().getFullYear();
+                for (let i = year; i <= year + 10; i++) {
+
+                    appendTemplate(validate_year, "option", `${i}`, {
+                        'value':`${i}`
+                    });
+                    
+                }
+            }
 
             if (inputs) {
                 inputs.forEach((input)=>{ 
@@ -43,6 +76,8 @@ document.querySelectorAll("#app").forEach((page)=>{
                 });
             }
 
+
+
             if (installments) {
                 installments.innerHTML = '';
                 for (let i = 1; i <= 6; i++) {
@@ -65,9 +100,13 @@ document.querySelectorAll("#app").forEach((page)=>{
                         showAlert("O número do cartão de crédito está incorreto.", "error");
                         creditCardNumber.focus();
                         status = false;
-                    } else if (creditCardValidate.value.length < 5) {
-                        showAlert("A validade do cartão de crédito está incorreta.", "error");
-                        creditCardValidate.focus();
+                    } else if (validate_month.selectedIndex === 0) {
+                        showAlert("O mês de validade do cartão de crédito está incorreta.", "error");
+                        validate_month.focus();
+                        status = false;
+                    } else if (validate_year.selectedIndex === 0) {
+                        showAlert("O ano de validade do cartão de crédito está incorreta.", "error");
+                        validate_year.focus();
                         status = false;
                     } else if (creditCardCVV.value.length < 3) {
                         showAlert("O código de segurança do cartão está incorreto.", "error");
@@ -82,18 +121,7 @@ document.querySelectorAll("#app").forEach((page)=>{
                         hideAlert("error");
                     }
 
-                    inputs.forEach((input)=>{
-                        if (checkInput(input) === false) {
-                            showAlert("Verifique se todos os campos estão preenchidos.", "error")
-                            status = false;
-                        } else {
-                            hideAlert("error");
-                            status = true;
-                        }
-                    });
-
-   
-                    
+                   
                     if (status) {
                         saveOrderBtn.disabled = true;
                         saveOrderBtn.innerHTML = "Aguarde..."
