@@ -72,6 +72,22 @@
             > header {
                 @include components.horizontalTitle;
                 width: 100%;
+                > div {
+                    width: 300px;
+                    height: 45px;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 5px;
+                    label {
+                        text-transform: uppercase;
+                        margin-bottom: 5px;
+                    }
+                    input {
+                        border-radius: var(--radius);
+                        text-transform: uppercase;
+                        width: 90%;
+                    }
+                }
             }
             > section {
                 height: calc(100vh - 494px);
