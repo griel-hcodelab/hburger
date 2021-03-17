@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="shortcut icon" href="assets/images/logo-favicon-red.svg" type="image/x-icon" />
 </head>
-<body id="app">
+<body id="app" class="payment">
 
     <section class="page">
 
@@ -17,7 +17,7 @@
                 <img src="assets/images/logo-icon-red.svg" alt="Logo Icone" id="logo-icon" />
                 <img src="assets/images/logo-text-red.svg" alt="Logo Texto" id="logo-text" />
             </a>
-            <img src="https://i.pravatar.cc/50" alt="Avatar" id="avatar" />
+            <img src="./assets/images/default.png" alt="Avatar" id="avatar" />
             <div class="profile-menu">
                 <a href="change-photo.html">Mudar Foto</a>
                 <a href="signout.html">Sair</a>
@@ -31,12 +31,22 @@
             <section>
                 
                 <form>
+                    <div id="alert">
 
-                    <input type="text" name="number" placeholder="Número do Cartão" />
+                    </div>
+
+                    <input type="text" name="number" placeholder="Número do Cartão" minlength="19" />
 
                     <div class="fields">
                         <div class="field">
-                            <input type="text" name="validate" placeholder="Validade" />
+                            <select name="validate_month" id="validate_month">
+                                <option value="0">Mês</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <select name="validate_year" id="validate_year">
+                                <option value="0">Ano</option>
+                            </select>
                         </div>
                         <div class="field">
                             <input type="text" name="code" placeholder="Código de Segurança" />
@@ -52,8 +62,7 @@
                     </select>
 
                     <select name="installments">
-                        <option value="1">1 parcela de R$ 100,00 (R$ 100,00)</option>
-                        <option value="2">2 parcelas de R$ 52,26 (R$ 104,52)</option>
+
                     </select>
                     <div id="alert">
 

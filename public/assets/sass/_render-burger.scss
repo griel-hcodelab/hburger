@@ -1,0 +1,13 @@
+#app {
+    section {
+        main {
+            section {
+                div {
+                    &.hide {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

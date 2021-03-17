@@ -1,5 +1,5 @@
 import firebase from './firebase-app'
-import { appendTemplate, formatPrice } from './utils';
+import { appendTemplate, formatPrice, hideAlert, showAlert } from './utils';
 const db = firebase.firestore();
 const auth = firebase.auth();
 
@@ -139,9 +139,13 @@ if (order) {
 
         const deleteOrder = (orderID)=>{
             db.collection(`pedidos/${userLogged}/orders`).doc(orderID).delete().then(() => {
-                window.location.reload();
+                //window.location.reload();
+                showAlert("O pedido foi apagado com sucesso!","success");
+                setTimeout(()=>{
+                    hideAlert('success');
+                }, 2000);
             }).catch((error) => {
-                console.error("Error removing document: ", error);
+                showAlert(`Não foi possível apagar este pedido. Esta mensagem de erro pode ajudar: ${error}`,"error");
             });
         }
 

@@ -69,9 +69,47 @@
             padding-bottom: 64px;
             flex: 1;
             width: 100%;
+            .btnBack {
+                display: flex;
+                text-decoration: none;
+                background-color: red;
+                //border: 1px solid rgba(#FF5252, .7);
+                border-radius: var(--radius);
+                height: 40px;
+                width: 200px;
+                margin-top: 15px;
+                justify-content: center;
+                align-items: center;
+                color: var(--white);
+                span {
+                    text-transform: uppercase;
+                    color: white;
+                    font-size: 16px;
+                    background-color: red;
+                }
+                &:hover {
+                    box-shadow: 0 0 10px var(--primary);
+                }
+            }
             > header {
                 @include components.horizontalTitle;
                 width: 100%;
+                > div {
+                    width: 300px;
+                    height: 45px;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 5px;
+                    label {
+                        text-transform: uppercase;
+                        margin-bottom: 5px;
+                    }
+                    input {
+                        border-radius: var(--radius);
+                        text-transform: uppercase;
+                        width: 90%;
+                    }
+                }
             }
             > section {
                 height: calc(100vh - 494px);
@@ -93,9 +131,13 @@
                         font-weight: 300;
                         cursor: pointer;
                         transition: none;
+                        border-bottom: var(--secondary) 1px dotted;
+                        padding-bottom: 15px;
+                        padding-top: 15px;
                         h3, div {
                             padding: 10px 0;
-                            border-bottom: var(--secondary) 1px dotted;
+                            //border-bottom: var(--secondary) 1px dotted;
+                            //height: 60px;
                         }
                         h3 {
                             flex: 1;
@@ -149,9 +191,15 @@
             width: 100%;
             background-color: colors.$bgHorizontalLine;
             height: 64px;
+            flex-direction: row;
             @include mixins.flex-center;
             button {
                 @include components.button(colors.$primary);
+            }
+            h2 {
+                margin-left: 15px;
+                border-left: 1px solid;
+                padding-left: 15px;
             }
             &.show {
                 z-index: 1;
@@ -211,6 +259,18 @@
         background-color: var(--white);
         color: var(--dark);
         height: 64px;
+        div {
+            &#alert {
+                &.error {
+                    @include components.error;
+                    display: none;
+                }
+                &.success {
+                    @include components.success;
+                    display: none;    
+                }
+            }
+        }
         header {
             flex-direction: row;
             justify-content: space-between;

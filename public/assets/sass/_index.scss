@@ -1,0 +1,135 @@
+@use "defaults";
+@use "components";
+@use "colors";
+@use "mixins";
+@use "vars";
+@use "form";
+@use "sass:color";
+
+#new {
+  &.no-footer > section main {
+    padding-bottom: 0;
+  }
+
+  > section {
+    flex: 1;
+    > header {
+      @include components.newheader;
+      width: 100%;
+      position: relative;
+      &::before {
+        position: absolute;
+        top: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-position: top center;
+        @if colors.$theme == red {
+          background-image: linear-gradient(
+              180deg,
+              rgba(7, 13, 13, 0.5) 50.52%,
+              colors.$dark 100%
+            ),
+            url("../images/photo-red.jpg");
+        }
+        @if colors.$theme == green {
+          background-image: linear-gradient(
+              180deg,
+              rgba(7, 13, 13, 0.5) 50.52%,
+              colors.$dark 100%
+            ),
+            url("../images/photo-green.jpg");
+        }
+        @if colors.$theme == blue {
+          background-image: linear-gradient(
+              180deg,
+              rgba(7, 13, 13, 0.5) 50.52%,
+              colors.$dark 100%
+            ),
+            url("../images/photo-blue.jpg");
+        }
+        background-repeat: no-repeat;
+        background-size: cover;
+        filter: brightness(0.8);
+      }
+      a {
+        margin-top: 50px;
+      }
+
+      #avatar {
+        position: absolute;
+        top: var(--space);
+        right: var(--space);
+        @include components.avatar;
+      }
+
+      div {
+        margin-top: 40px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 90px;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 2;
+        small {
+          &.one {
+              text-transform: uppercase;
+            font-size: 24px;
+            color: white;
+          }
+          &.two {
+              text-transform: uppercase;
+            font-size: 40px;
+            color: white;
+          }
+        }
+      }
+
+      a {
+          justify-content: center;
+          align-items: center;
+          text-decoration: none;
+          &#btnIndex {
+            width: 250px;
+            height: 50px;
+            margin-top:60px;
+            text-transform: uppercase;
+            border-radius: var(--radius);
+            background-color: red;
+            font-size: 18px;
+            color: white;
+            z-index: 3;
+          }
+        }
+    }
+  }
+  @media (min-width: vars.$desktopStartWidth) {
+    flex-direction: row;
+    section {
+      header {
+        div {
+          height: 150px;
+          small {
+            &.one {
+              text-transform: uppercase;
+              font-size: 34px;
+            }
+            &.two {
+              margin-top: 10px;
+              font-size: 58px;
+            }
+          }
+        }
+  
+        a {
+            &#btnIndex {
+              width: 400px;
+              height: 70px;
+              margin-top:60px;
+              font-size: 28px;
+            }
+          }
+      }
+    }
+  }
+}

@@ -18,6 +18,10 @@ if(authPage) {
             e.preventDefault()
     
             const values = getFormValues(formAuthRegister)
+            const btnSubmit = formAuthRegister.querySelector("[type=submit]");
+
+            btnSubmit.disabled = true
+            btnSubmit.innerHTML = "Cadastrando..."
     
             auth
                 .createUserWithEmailAndPassword(values.email, values.password)
@@ -33,6 +37,9 @@ if(authPage) {
                 })
                 .catch(error => {
                     alert("Erro ao Cadastrar")
+                }).finally(() => {
+                    btnSubmit.disabled = false
+                    btnSubmit.innerHTML = "Enviar"
                 })
         })
     }
@@ -45,6 +52,10 @@ if(authPage) {
             e.preventDefault()
     
             const values = getFormValues(formAuthLogin)
+            const btnSubmit = formAuthLogin.querySelector("[type=submit]");
+
+            btnSubmit.disabled = true
+            btnSubmit.innerHTML = "Logando..."
     
             auth
                 .signInWithEmailAndPassword(values.email, values.password)
@@ -53,6 +64,9 @@ if(authPage) {
                 })
                 .catch(error => {
                     alert("Email ou senha não existem", error)
+                }).finally(() => {
+                    btnSubmit.disabled = false
+                    btnSubmit.innerHTML = "Enviar"
                 })
         })
     }

@@ -1,0 +1,20 @@
+@use 'components';
+
+#app {
+    &.orders {
+        main {
+            div {
+                &#alert {
+                    &.error {
+                        @include components.error;
+                        display: none;
+                    }
+                    &.success {
+                        @include components.success;
+                        display: none;    
+                    }
+                }
+            }
+        }
+    }
+}
