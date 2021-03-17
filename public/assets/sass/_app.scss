@@ -205,7 +205,7 @@
                 z-index: 1;
             }
             @media (min-width: vars.$desktopStartWidth) {
-                width: calc(100vw - #{vars.$asideWidth});
+                width: calc(100vw - 367px);
             }
         }
         &.page {
