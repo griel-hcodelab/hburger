@@ -3,13 +3,20 @@ import { appendTemplate, formatPrice } from './utils';
 const db = firebase.firestore();
 const auth = firebase.auth();
 
-let labels;
-let removeBtns = [];
-var userID;
+
 
 const index = document.querySelectorAll(".carte")
 if (index) {
     index.forEach((page)=>{
+
+        //Variáveis da página
+        const footer = page.querySelector("footer");
+        const saveBurger = page.querySelector("#saveBurger");
+        let values = [];
+        let totalValue;
+        let labels;
+        let removeBtns = [];
+        var userID;
 
         //Pegando o ID do usuário logado
         auth.onAuthStateChanged(user => {
@@ -26,10 +33,6 @@ if (index) {
 
             }
         })
-
-        //Variáveis da página
-        const footer = page.querySelector("footer");
-        const saveBurger = page.querySelector("#saveBurger");
 
         window.addEventListener("load", ()=>{
             updateHash();
@@ -135,8 +138,7 @@ if (index) {
                 page.querySelector("#app > aside > header > strong > small").innerHTML = `${items} H-Burgers`
             }
 
-            let values = [];
-            let totalValue;
+
 
             let valuesHtml = page.querySelectorAll("aside > section > ul > li > div:nth-child(2)");
             valuesHtml.forEach((item)=>{
@@ -299,24 +301,36 @@ if (index) {
                         saveBurger.disabled = false;
                         saveBurger.innerHTML = 'Escolher o Pão ►';
                     } 
+                    
+                    updateSubTotal();
                 })
             }
             
         }
         
         //Atualizando o subtotal
-        const updateSubTotal = ()=>{
-
+        const updateSubTotal = (inputs)=>{
+            let subtotalValues = [];
+            let inputsChecked = page.querySelectorAll(".category input:checked");
+            inputsChecked.forEach((price)=>{
+                subtotalValues.push(
+                    parseInt(
+                        price.parentElement.querySelector("div")
+                        .innerText.replace("R$","").replace(",",".")
+                        )
+                    );
+                console.log(subtotalValues)
+            })
         }
 
 
 
         /*page.querySelectorAll("input").forEach((input)=>{
             input.addEventListener("change", ()=>{
-                let subtotalPrice = [];
+                
 
                     page.querySelectorAll(".category input:checked").forEach((price)=>{
-                        subtotalPrice.push(
+                        subtotalValues.push(
                             parseInt(
                                 price.parentElement.querySelector("div")
                                 .innerText.replace("R$","").replace(",",".")
