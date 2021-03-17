@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,7 +14,7 @@
     <section>
 
         <header>
-            <a href="index.html">
+            <a href="#">
                 <img src="assets/images/logo-icon-red.svg" alt="Logo Icone" id="logo-icon" />
                 <img src="assets/images/logo-text-red.svg" alt="Logo Texto" id="logo-text" />
             </a>
@@ -30,101 +31,34 @@
                 <h1>Monte o seu <span>Hburger</span></h1>
             </header>
             <section>
-                <div class="category">
+                <div class="category hide" id="burger">
                     <h2>Escolha seu H-Burger</h2>
+                    <p>Primeiro, escolha seu lanche. Você pode adicionar mais ingredientes depois.</p>
                     <ul class="burger">
                         
                     </ul>
                 </div>
-                <div class="category">
+                <div class="category hide" id="bread">
                     <h2>Quer um pão diferente? <small>(escolha apenas um)</small></h2>
                     <ul class="bread">
                         
                     </ul>
+                    <a href="#" class="btnBack"><span>Voltar pro lanche</span></a>
                 </div>
-                <div class="category">
-                    <h2>Quer turbinar seu lanche? <small>(escolha a vontade!)</small></h2>
+                <div class="category hide" id="aditionals">
+                    <h2>Quer turbinar seu lanche? <small>(Você pode escolher a vontade, ou simplesmente avançar)</small></h2>
                     <ul class="aditionals">
-                        <!--<li>
-                            <label>
-                                <input type="checkbox" name="item" />
-                                <span></span>
-                                <h3>Carne Bovina 125g</h3>
-                                <div>R$ 3,00</div>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" name="item" />
-                                <span></span>
-                                <h3>Carne de Frango 125g</h3>
-                                <div>R$ 2,50</div>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" name="item" />
-                                <span></span>
-                                <h3>Carne de Peixe 125g</h3>
-                                <div>R$ 2,00</div>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" name="item" />
-                                <span></span>
-                                <h3>Carne Bovina 125g</h3>
-                                <div>R$ 3,00</div>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" name="item" />
-                                <span></span>
-                                <h3>Carne de Frango 125g</h3>
-                                <div>R$ 2,50</div>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" name="item" />
-                                <span></span>
-                                <h3>Carne de Peixe 125g</h3>
-                                <div>R$ 2,00</div>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" name="item" />
-                                <span></span>
-                                <h3>Carne Bovina 125g</h3>
-                                <div>R$ 3,00</div>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" name="item" />
-                                <span></span>
-                                <h3>Carne de Frango 125g</h3>
-                                <div>R$ 2,50</div>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" name="item" />
-                                <span></span>
-                                <h3>Carne de Peixe 125g</h3>
-                                <div>R$ 2,00</div>
-                            </label>
-                        </li>-->
+                        
                     </ul>
+                    <a href="#bread" class="btnBack"><span>Voltar pro pão</span></a>
                 </div>
             </section>
         </main>
 
         <!--<footer class="show">-->
         <footer>
-            <button type="button" id="saveBurger" aria-label="Salvar Hamburguer" disabled>Salvar Hamburguer</button>
+            <button type="button" id="saveBurger" disabled aria-label="Salvar Hamburguer">Escolha o seu lanche</button>
+            <h2>R$0,00</h2>
         </footer>
 
     </section>
@@ -164,4 +98,5 @@
     </aside>
     <script src="bundle.js"></script>
 </body>
+
 </html>

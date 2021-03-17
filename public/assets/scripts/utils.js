@@ -15,7 +15,7 @@ export function menuHandlerRemove(menu, action = null) {
 }
 
 
-//Gerenciamento de alertas
+//Gerenciamento de alertas, onde type é: 'success' para sucesso e 'error' para erro
 export function showAlert(message, type) {
     document.querySelector("#alert").style.display = "flex";
     document.querySelector("#alert").classList.add(type);
