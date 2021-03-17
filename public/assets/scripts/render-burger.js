@@ -21,7 +21,6 @@ if (index) {
                       tray.push(item.data());
                     })
                     renderTray(tray)
-                    //renderAditionals(aditionals);
                 });
 
 
@@ -252,12 +251,9 @@ if (index) {
 
         //Apagando bandeja
         const deleteTray = (trayID)=>{
-
-
             db.collection(`pedidos/${userID}/bandeja`).doc(trayID).delete()
             .then(() => {
-                //document.querySelector("aside section ul").innerHTML = "Apagando seu HBurger..."
-                //window.location.reload();
+
             }).catch((error) => {
                 console.error("Error removing document: ", error);
             });
@@ -305,43 +301,34 @@ if (index) {
                     } 
                 })
             }
+            
         }
+        
+        //Atualizando o subtotal
+        const updateSubTotal = ()=>{
+
+        }
+
+
+
+        /*page.querySelectorAll("input").forEach((input)=>{
+            input.addEventListener("change", ()=>{
+                let subtotalPrice = [];
+
+                    page.querySelectorAll(".category input:checked").forEach((price)=>{
+                        subtotalPrice.push(
+                            parseInt(
+                                price.parentElement.querySelector("div")
+                                .innerText.replace("R$","").replace(",",".")
+                                )
+                            );
+                        console.log(subtotalPrice)
+                    })
+            })
+        })*/
 
 
 
     });
 
-
-
-    
-
 }
-
-        
-
-/*const updateChecks = ()=>{
-    const inputs = document.querySelectorAll(".category ul li label");
-
-    inputs.forEach((item)=>{
-        item.addEventListener("click", ()=>{
-            console.log(item)
-        })
-    })
-
-    for (let i = 0; i < inputs.length; i++) {
-        inputs[i].addEventListener("click", ()=>{
-            switch (window.location.hash) {
-                default:
-                    window.location.hash = '#bread';
-                break;
-                case "#bread":
-                    window.location.hash = '#aditionals';
-                    //está clicando 4x
-                break;
-            }
-            console.log('a', inputs[i])
-        });
-    }
-
-
-};*/
