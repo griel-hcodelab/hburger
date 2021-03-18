@@ -17,6 +17,20 @@
         /* Roberto */
         overflow: hidden;
         height: 200px;
+        .detail {
+            color: #000;
+            text-align: left;
+            z-index: 445;
+            transform: translate(0px, 0px);
+            background-color: #50ff0063;
+            height: 200px;
+            width: 0px;
+            border-radius: 10px 0 0 10px;
+            transition: 1s;
+            position: relative;
+            left: -280px;
+            overflow-y: scroll;
+        }
         .confirm {
             color: #000;
             text-align: center;
@@ -99,6 +113,13 @@
                 border: none;
                 outline: none;
                 cursor: pointer;
+                &:disabled {
+                    opacity: 0.5;
+                    cursor: no-drop;
+                    &:active {
+                        opacity: inherit;
+                    }
+                }
                 &:hover {
                     opacity: .75;
                     background-color: var(--gray);

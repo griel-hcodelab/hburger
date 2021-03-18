@@ -45,7 +45,7 @@ if (order) {
 
             orders.forEach((item)=>{
                 appendTemplate(ul, "li", `
-                <div class="confirm item${item.id}">
+                <div class="confirm item${item.id}" data-time=${item.timestamp}>
 
                     <p>Você quer mesmo apagar este pedido?</p>
                     <div class="wrap">
@@ -98,15 +98,28 @@ if (order) {
                 `);
             });
 
-            btnDelete = page.querySelectorAll("[aria-label='Excluir']");
+
+
+            const btnDelete = page.querySelectorAll("[aria-label='Excluir']");
 
             if (btnDelete) {
                 btnDelete.forEach(btn=>{
                     btn.addEventListener("click", ()=>{
                         const box = page.querySelector(`.confirm.item${btn.id.split("delete")[1]}`);
-                        page.querySelector(`#act${btn.id.split('delete')[1]}`).style.display = "none"
-                        box.style.width = "50%";
-                        box.style.left = "-1px";
+       
+                        if (parseInt(box.dataset.time) <= Date.now() / 1000 | 0) {
+                            showAlert("Você não pode mais apagar este pedido", "error");
+                            //btn.disabled = true;
+                            setTimeout(() => {
+                                hideAlert('error')
+                            }, 2000);
+                        } else {
+                            
+                            page.querySelector(`#act${btn.id.split('delete')[1]}`).style.display = "none"
+                            box.style.width = "50%";
+                            box.style.left = "-1px";
+                        }
+
                     })
                 })
             }

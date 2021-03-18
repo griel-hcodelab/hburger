@@ -22,8 +22,10 @@ document.querySelectorAll("#app.payment").forEach((page)=>{
             const installments = page.querySelector("[name=installments]")
             const saveOrderBtn = page.querySelector("#paymentBtn");
 
-            let quantity = sessionStorage.getItem('items');
-            let value = parseFloat(sessionStorage.getItem('price'));
+            const quantity = sessionStorage.getItem('items');
+            const value = parseFloat(sessionStorage.getItem('price'));
+            const itemsName = sessionStorage.getItem('itemsName')
+            const itemsPrice = sessionStorage.getItem('itemsPrice')
 
             if (!quantity || !value ) {
                 showAlert("Alguma coisa deu errada com seu pedido. Você será direcionado à página inicial", 'error');
@@ -126,7 +128,7 @@ document.querySelectorAll("#app.payment").forEach((page)=>{
                         saveOrderBtn.disabled = true;
                         saveOrderBtn.innerHTML = "Aguarde..."
                         paymentProcess('Por favor, aguarde...');
-                        saveOrder(quantity, value);
+                        saveOrder(quantity, value, itemsName, itemsPrice);
                     }
                 });
             }
@@ -148,7 +150,7 @@ const paymentProcess = (message)=>{
 }
 
     
-const saveOrder = (q, v)=>{
+const saveOrder = (quantity, value, itemName, itemPrice)=>{
 
     auth.onAuthStateChanged(user => {
         if (user) {
@@ -169,13 +171,16 @@ const saveOrder = (q, v)=>{
             pedidos.set({
                 cliente_id: user.uid,
                 data: `${data.getDate()}/${data.getMonth()+1}/${data.getFullYear()}`,
+                timestamp: Date.now() / 1000 | 0 + 100,
                 id: parseInt(orderID),
-                itens: q,//uantity
-                valor: v//alue
+                itens: quantity,
+                valor: value,
+                itensDetalhe: itemName,
+                itensValor: itemPrice
         
             })
             .then(() => {
-                paymentProcess("Pagamento aprovado! Você será direcionado ao seus pedidos.");
+                paymentProcess("Seu pagamento está sendo processado. Você será direcionado ao seus pedidos.");
                 sessionStorage.clear('items');
                 sessionStorage.clear('price');
                 setTimeout(()=>{

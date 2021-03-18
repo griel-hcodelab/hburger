@@ -28,8 +28,8 @@ if (index) {
                     })
                     renderTray(tray)
                 });
-
-
+            } else { 
+                window.location.href = '/login.html';
             }
         })
 
@@ -226,13 +226,13 @@ if (index) {
         const saveBurgerFn = ()=>{
             const selected = page.querySelectorAll("input:checked");
 
-            let burger = [];
-
+            let itemsName = [];
             let itemsPrice = [];
 
             let burgerName = page.querySelector("ul.burger").querySelector("input:checked").closest("label").dataset.burgername;
 
             selected.forEach((item)=>{
+                itemsName.push(item.parentNode.dataset.name);
                 let price = parseFloat(item.closest("label").dataset.price);
                 itemsPrice.push(price);
             });
@@ -247,6 +247,8 @@ if (index) {
 
             tray.set({
                 "burgerName":burgerName,
+                "itemsName":itemsName,
+                "itemsPrice":itemsPrice,
                 "prices":subTotal,
                 "trayID":trayNumber
             })
@@ -277,9 +279,12 @@ if (index) {
             if (items === 0) {
                 showAlert("Você não pode ir para o pagamento se não tiver comprado nada!","error");
             } else {
+                payBtn.disabled = true;
+                payBtn.innerHTML = 'Aguarde...';
                 hideAlert('error');
                 sessionStorage.setItem("items", parseInt(page.querySelector("aside > header > strong > small").innerHTML));
-                sessionStorage.setItem("price", document.querySelector("aside > footer > div.price > span").innerHTML.replace("R$&nbsp;","").replace(",","."))
+                sessionStorage.setItem("price", document.querySelector("aside > footer > div.price > span").innerHTML.replace("R$&nbsp;","").replace(",","."));
+
                 goToPay();
             }
 
@@ -290,6 +295,9 @@ if (index) {
 
                 snapshot.forEach((item)=>{
                     let deleteTrayId = item.data().trayID;
+
+                    sessionStorage.setItem('itemsName', item.data().itemsName)
+                    sessionStorage.setItem('itemsPrice', item.data().itemsPrice)
 
                     db.collection(`pedidos/${userID}/bandeja`).doc(deleteTrayId.toString()).delete()
                     .then(() => {
